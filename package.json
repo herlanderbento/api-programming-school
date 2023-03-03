@@ -1,0 +1,24 @@
+{
+  "name": "programming-school",
+  "version": "1.0.0",
+  "description": "## VISÃO GERAL",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run tsc -- --noEmit && jest",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herlanderbento/programming-school.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/herlanderbento/programming-school/issues"
+  },
+  "homepage": "https://github.com/herlanderbento/programming-school#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
