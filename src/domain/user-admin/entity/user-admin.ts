@@ -1,19 +1,23 @@
-export default class UserAdmin {
-  private _id: string;
+import Entity from '../../@shared/entity/entity.abstract';
+import NotificationError from '../../@shared/notification/notification.error';
+import UserAdminValidatorFactory from '../factory/user-admin.validator.factory';
+
+export default class UserAdmin extends Entity {
   private _name: string;
   private _email: string;
+  private _password: string;
   private _rewardPoints: number = 0;
 
-  constructor(id: string, name: string, email: string) {
+  constructor(id: string, name: string, email: string, password: string) {
+    super();
     this._id = id;
     this._name = name;
     this._email = email;
-
+    this._password = password;
     this.validate();
-  }
 
-  public get id(): string {
-    return this._id;
+    if (this.notification.hasErrors())
+      throw new NotificationError(this.notification.getErrors());
   }
 
   public get name(): string {
@@ -34,6 +38,14 @@ export default class UserAdmin {
     this.validate();
   }
 
+  public get password(): string {
+    return this._password;
+  }
+
+  public changePassword(password: string) {
+    this._password = password;
+  }
+
   public get rewardPoints(): number {
     return this._rewardPoints;
   }
@@ -43,14 +55,6 @@ export default class UserAdmin {
   }
 
   public validate() {
-    if (this._id.length === 0) {
-      throw new Error('Id is required');
-    }
-    if (this._name.length === 0) {
-      throw new Error('Name is required');
-    }
-    if (this._email.length === 0) {
-      throw new Error('Email is required');
-    }
+    UserAdminValidatorFactory.create().validate(this);
   }
 }

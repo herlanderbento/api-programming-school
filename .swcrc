@@ -1,12 +1,37 @@
 {
     "jsc": {
-        "parser":{
+        "parser": {
             "syntax": "typescript",
-            "decorators": true
+            "decorators": true,
+            "dynamicImport": true,
+            "decoratorsBeforeExport": true
         },
         "transform": {
             "legacyDecorator": true,
             "decoratorMetadata": true
-        }
+        },
+        "target": "es2021",
+        "externalHelpers": true,
+        // "rootDir": ".",
+        // "baseUrl": "./src",
+        // "paths": {
+        //     "@*": [
+        //         "./src/*",
+        //         "./*"
+        //     ]
+        // }
     }
 }
+
+// {
+//     "jsc": {
+//         "parser":{
+//             "syntax": "typescript",
+//             "decorators": true
+//         },
+//         "transform": {
+//             "legacyDecorator": true,
+//             "decoratorMetadata": true
+//         }
+//     }
+// }

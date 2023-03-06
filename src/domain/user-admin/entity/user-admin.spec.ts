@@ -3,24 +3,30 @@ import UserAdmin from './user-admin';
 describe('Unit test user admin', () => {
   it('should throw error when id is empty', () => {
     expect(() => {
-      new UserAdmin('', 'Admin', 'admin@email.com');
-    }).toThrowError('Id is required');
+      new UserAdmin('', 'Admin', 'admin@email.com', '1234');
+    }).toThrowError('userAdmin: Id is required');
   });
 
   it('should throw error when name is empty', () => {
     expect(() => {
-      new UserAdmin('123', '', 'admin@email.com');
-    }).toThrowError('Name is required');
+      new UserAdmin('123', '', 'admin@email.com', '1234');
+    }).toThrowError('userAdmin: Name is required');
   });
 
   it('should throw error when id email empty', () => {
     expect(() => {
-      new UserAdmin('123', 'Admin', '');
-    }).toThrowError('Email is required');
+      new UserAdmin('123', 'Admin', '', '123');
+    }).toThrowError('userAdmin: Email is required');
+  });
+
+  it('should throw error when id, name, email and password are empty', () => {
+    expect(() => {
+      new UserAdmin('', '', '', '');
+    }).toThrowError('userAdmin: Id is required,userAdmin: Name is required,userAdmin: Email is required,userAdmin: Password is required');
   });
 
   it('should be able change name', () => {
-    const userAdmin = new UserAdmin('123', 'Admin', 'admin@email.com');
+    const userAdmin = new UserAdmin('123', 'Admin', 'admin@email.com', '123');
 
     userAdmin.changeName('John Doe');
 
@@ -28,7 +34,7 @@ describe('Unit test user admin', () => {
   });
 
   it('should be able change email', () => {
-    const userAdmin = new UserAdmin('123', 'Admin', 'admin@email.com');
+    const userAdmin = new UserAdmin('123', 'Admin', 'admin@email.com', '1234');
 
     userAdmin.changeEmail;
     ('admin@email.com');
@@ -37,7 +43,7 @@ describe('Unit test user admin', () => {
   });
 
   it('should be able change name and email', () => {
-    const userAdmin = new UserAdmin('123', 'Admin', 'admin@email.com');
+    const userAdmin = new UserAdmin('123', 'Admin', 'admin@email.com', '1234');
 
     userAdmin.changeName('John Doe');
     userAdmin.changeEmail;
@@ -48,7 +54,7 @@ describe('Unit test user admin', () => {
   });
 
   it('should add reward points', () => {
-    const userAdmin = new UserAdmin('123', 'admin', 'admin@gmail.com');
+    const userAdmin = new UserAdmin('123', 'admin', 'admin@gmail.com', '1234');
     expect(userAdmin.rewardPoints).toBe(0);
 
     userAdmin.addRewardPoints(10);

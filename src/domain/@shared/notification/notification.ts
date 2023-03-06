@@ -26,7 +26,6 @@ export default class Notification {
         message += `${error.context}: ${error.message},`;
       }
     });
-
     return message;
   }
 }

@@ -1,5 +1,4 @@
-import Notification from './notification';
-
+import Notification from './notification'
 describe('Unit tests for notifications', () => {
   it('should be able create errors', () => {
     const notification = new Notification();
