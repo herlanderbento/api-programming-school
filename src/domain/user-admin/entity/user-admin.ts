@@ -44,6 +44,7 @@ export default class UserAdmin extends Entity {
 
   public changePassword(password: string) {
     this._password = password;
+    this.validate();
   }
 
   public get rewardPoints(): number {
