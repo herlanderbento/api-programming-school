@@ -45,4 +45,15 @@ describe('User admin repository test', () => {
       rewardPoints: userAdmin.rewardPoints,
     });
   });
+
+  it('should be able find a user admin ', async () => {
+    const userAdminRepository = new UserAdminRepository();
+    const userAdmin = new UserAdmin('123', 'admin', 'admin@gmail.com', '1234');
+
+    await userAdminRepository.create(userAdmin)
+
+    const userAdminResult = await userAdminRepository.findById(userAdmin.id)
+
+    expect(userAdmin).toStrictEqual(userAdminResult);
+  });
 });

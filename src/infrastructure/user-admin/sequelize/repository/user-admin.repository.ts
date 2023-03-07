@@ -10,4 +10,25 @@ export default class UserAdminRepository
 
     await UserAdminModel.create({ id, name, email, password, rewardPoints });
   }
+
+  async findById(id: string): Promise<UserAdmin> {
+    let userAdminModel;
+    try {
+      userAdminModel = await UserAdminModel.findOne({
+        where: {
+          id,
+        },
+        rejectOnEmpty: true,
+      });
+    } catch (error) {
+      throw new Error('user admin not found');
+    }
+
+    return new UserAdmin(
+      userAdminModel.id,
+      userAdminModel.name,
+      userAdminModel.email,
+      userAdminModel.password
+    );
+  }
 }
