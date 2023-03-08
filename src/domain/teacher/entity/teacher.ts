@@ -1,10 +1,14 @@
 import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
+import TeacherValidatorFactory from '../factory/teacher.validator.factory';
+import Address from '../value-object/address';
 
 export default class Teacher extends Entity {
   private _name: string;
   private _email: string;
   private _password: string;
+  private _address: Address;
+  private _active: boolean = false;
 
   constructor(id: string, name: string, email: string, password: string) {
     super();
@@ -43,5 +47,30 @@ export default class Teacher extends Entity {
     this._password = password;
   }
 
-  public validate(): void {}
+  public get address(): Address {
+    return this._address;
+  }
+
+  public changeAddress(address: Address) {
+    this._address = address;
+  }
+
+  public isActive(): boolean {
+    return this._active;
+  }
+
+  public activate() {
+    if (this._address === undefined) {
+      throw new Error('Address is mandatory to activate a customer');
+    }
+    this._active = true;
+  }
+
+  public deactivate() {
+    this._active = false;
+  }
+
+  public validate(): void {
+    TeacherValidatorFactory.create().validate(this);
+  }
 }
