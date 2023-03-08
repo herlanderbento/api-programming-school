@@ -5,15 +5,15 @@ import AddressValidatorFactory from '../factory/address.validator.factory';
 export default class Address extends Entity {
   private _state: string;
   private _city: string;
-  private _street: string;
+  private _address: string;
   private _phone: string;
 
-  constructor(state: string, city: string, street: string, phone: string) {
+  constructor(state: string, city: string, address: string, phone: string) {
     super();
 
     this._state = state;
     this._city = city;
-    this._street = street;
+    this._address = address;
     this._phone = phone;
     this.validate();
 
@@ -37,12 +37,12 @@ export default class Address extends Entity {
     this._city = city;
   }
 
-  public get street(): string {
-    return this._street;
+  public get address(): string {
+    return this._address;
   }
 
-  public changeStreet(street: string) {
-    this._street = street;
+  public changeAddress(address: string) {
+    this._address = address;
   }
 
   public get phone(): string {
