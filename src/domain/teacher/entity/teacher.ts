@@ -7,7 +7,7 @@ export default class Teacher extends Entity {
   private _name: string;
   private _email: string;
   private _password: string;
-  private _address: Address;
+  private _address!: Address;
   private _active: boolean = false;
 
   constructor(id: string, name: string, email: string, password: string) {
@@ -73,4 +73,9 @@ export default class Teacher extends Entity {
   public validate(): void {
     TeacherValidatorFactory.create().validate(this);
   }
+
+  set address(address: Address) {
+    this._address = address;
+  }
+  
 }

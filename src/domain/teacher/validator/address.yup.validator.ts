@@ -6,22 +6,22 @@ export default class AddressYupValidator
   implements ValidatorInterface<Address>
 {
   validate(entity: Address): void {
-    const { state, city, address, phone } = entity;
-    
+    const { state, city, street, phone } = entity;
+
     try {
       yup
         .object()
         .shape({
           state: yup.string().required('State is required'),
           city: yup.string().required('City is required'),
-          address: yup.string().required('Address is required'),
+          street: yup.string().required('Street is required'),
           phone: yup.string().required('Phone is required'),
         })
         .validateSync(
           {
             state,
             city,
-            address,
+            street,
             phone,
           },
           {
@@ -33,7 +33,7 @@ export default class AddressYupValidator
 
       err.errors.forEach((error) => {
         entity.notification.addError({
-          context: 'teacher',
+          context: 'address',
           message: error,
         });
       });
