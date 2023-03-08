@@ -6,9 +6,9 @@ export default class UserAdminRepository
   implements UserAdminRepositoryInterface
 {
   async create(entity: UserAdmin): Promise<void> {
-    const { id, name, email, password, rewardPoints } = entity;
+    const { id, name, email, password } = entity;
 
-    await UserAdminModel.create({ id, name, email, password, rewardPoints });
+    await UserAdminModel.create({ id, name, email, password });
   }
 
   async findById(id: string): Promise<UserAdmin> {

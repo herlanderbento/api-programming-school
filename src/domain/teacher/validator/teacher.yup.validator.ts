@@ -1,11 +1,11 @@
-import * as yup from 'yup';
 import ValidatorInterface from '../../@shared/validator/validator.interface';
-import UserAdmin from '../entity/user-admin';
+import Teacher from '../entity/teacher';
+import * as yup from 'yup';
 
-export default class UserAdminYupValidator
-  implements ValidatorInterface<UserAdmin>
+export default class TeacherYupValidator
+  implements ValidatorInterface<Teacher>
 {
-  public validate(entity: UserAdmin): void {
+  public validate(entity: Teacher): void {
     try {
       yup
         .object()
@@ -31,7 +31,7 @@ export default class UserAdminYupValidator
 
       err.errors.forEach((error) => {
         entity.notification.addError({
-          context: 'userAdmin',
+          context: 'teacher',
           message: error,
         });
       });

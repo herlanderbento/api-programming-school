@@ -19,6 +19,4 @@ export default class UserAdminModel extends Model {
   @Column({ allowNull: false })
   declare password: string;
 
-  @Column({ allowNull: false })
-  declare rewardPoints: number;
 }

@@ -42,7 +42,6 @@ describe('User admin repository test', () => {
       name: userAdmin.name,
       email: userAdmin.email,
       password: userAdmin.password,
-      rewardPoints: userAdmin.rewardPoints,
     });
   });
 

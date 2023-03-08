@@ -1,14 +1,14 @@
 import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
-import UserAdminValidatorFactory from '../factory/user-admin.validator.factory';
 
-export default class UserAdmin extends Entity {
+export default class Teacher extends Entity {
   private _name: string;
   private _email: string;
   private _password: string;
 
   constructor(id: string, name: string, email: string, password: string) {
     super();
+
     this._id = id;
     this._name = name;
     this._email = email;
@@ -25,7 +25,6 @@ export default class UserAdmin extends Entity {
 
   public changeName(name: string) {
     this._name = name;
-    this.validate();
   }
 
   public get email(): string {
@@ -34,7 +33,6 @@ export default class UserAdmin extends Entity {
 
   public changeEmail(email: string) {
     this._email = email;
-    this.validate();
   }
 
   public get password(): string {
@@ -43,10 +41,7 @@ export default class UserAdmin extends Entity {
 
   public changePassword(password: string) {
     this._password = password;
-    this.validate();
   }
 
-  public validate() {
-    UserAdminValidatorFactory.create().validate(this);
-  }
+  public validate(): void {}
 }

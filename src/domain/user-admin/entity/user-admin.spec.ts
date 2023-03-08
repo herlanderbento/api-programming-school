@@ -53,14 +53,4 @@ describe('Unit test user admin', () => {
     expect(userAdmin.email).toBe('admin@email.com');
   });
 
-  it('should add reward points', () => {
-    const userAdmin = new UserAdmin('123', 'admin', 'admin@gmail.com', '1234');
-    expect(userAdmin.rewardPoints).toBe(0);
-
-    userAdmin.addRewardPoints(10);
-    expect(userAdmin.rewardPoints).toBe(10);
-
-    userAdmin.addRewardPoints(10);
-    expect(userAdmin.rewardPoints).toBe(20);
-  });
 });
