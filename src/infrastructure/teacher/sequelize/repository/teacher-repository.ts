@@ -1,105 +1,51 @@
 import Teacher from '../../../../domain/teacher/entity/teacher';
 import TeacherRepositoryInterface from '../../../../domain/teacher/repository/teacher-repository.interface';
-import Address from '../../../../domain/teacher/value-object/address';
+import TeacherPhoneNumbersModel from '../model/teacher-phone-numbers.model';
 import TeacherModel from '../model/teacher.model';
+import TeacherMapper from '../mappers/teacher.mapper';
 
 export default class TeacherRepository implements TeacherRepositoryInterface {
+  private _mapper: TeacherMapper;
+
+  constructor(teacherMapper: TeacherMapper) {
+    this._mapper = teacherMapper;
+  }
+
   async create(entity: Teacher): Promise<void> {
-    await TeacherModel.create({
-      id: entity.id,
-      name: entity.name,
-      email: entity.email,
-      password: entity.password,
-      state: entity.address.state,
-      city: entity.address.city,
-      address: entity.address.address,
-      phone: entity.address.phone,
-      active: entity.isActive(),
+    await TeacherModel.create(this._mapper.toModel(entity), {
+      include: [{ model: TeacherPhoneNumbersModel }],
     });
   }
 
   async update(entity: Teacher): Promise<void> {
-    await TeacherModel.update(
-      {
+    await TeacherModel.update(this._mapper.toModel(entity), {
+      where: {
         id: entity.id,
-        name: entity.name,
-        email: entity.email,
-        password: entity.password,
-        state: entity.address.state,
-        city: entity.address.city,
-        address: entity.address.address,
-        phone: entity.address.phone,
-        active: entity.isActive(),
       },
-      {
-        where: {
-          id: entity.id,
-        },
-      }
-    );
+    });
   }
-
   async findById(id: string): Promise<Teacher> {
-    let teacherModel;
-
     try {
-      teacherModel = await TeacherModel.findOne({
+      const teacher = await TeacherModel.findOne({
         where: {
           id,
         },
         rejectOnEmpty: true,
+        include: ['phone_numbers'],
       });
-    } catch (e) {
+
+      return this._mapper.toEntity(teacher);
+    } catch (error) {
       throw new Error('Teacher not found');
     }
-
-    const teacher = new Teacher(
-      id,
-      teacherModel.name,
-      teacherModel.email,
-      teacherModel.password
-    );
-
-    const address = new Address(
-      teacherModel.state,
-      teacherModel.city,
-      teacherModel.address,
-      teacherModel.phone
-    );
-
-    teacher.changeAddress(address);
-
-    return teacher;
   }
 
   async findAll(): Promise<Teacher[]> {
-    const teacherModel = await TeacherModel.findAll();
-
-    const teachers = teacherModel.map((teacherModels) => {
-      let teacher = new Teacher(
-        teacherModels.id,
-        teacherModels.name,
-        teacherModels.email,
-        teacherModels.password
-      );
-
-      const address = new Address(
-        teacherModels.state,
-        teacherModels.city,
-        teacherModels.address,
-        teacherModels.phone
-      );
-
-      teacher.changeAddress(address);
-
-      if (teacherModels.active) {
-        teacher.activate();
-      }
-
-      return teacher;
+    const teacherModel = await TeacherModel.findAll({
+      include: ['phone_numbers'],
     });
 
-    return teachers;
+    return teacherModel.map((teacher) => this._mapper.toEntity(teacher));
   }
 
   async delete(id: string): Promise<void> {
@@ -111,3 +57,5 @@ export default class TeacherRepository implements TeacherRepositoryInterface {
     });
   }
 }
+
+// Herlander Bento

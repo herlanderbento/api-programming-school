@@ -1,7 +1,14 @@
-import { Table, Model, PrimaryKey, Column } from 'sequelize-typescript';
+import {
+  Column,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
+import TeacherPhoneNumbersModel from './teacher-phone-numbers.model';
 
 @Table({
-  tableName: 'teacher',
+  tableName: 'teachers',
   timestamps: false,
 })
 export default class TeacherModel extends Model {
@@ -27,8 +34,8 @@ export default class TeacherModel extends Model {
   @Column({ allowNull: false })
   declare address: string;
 
-  @Column({ allowNull: false })
-  declare phone: string;
+  @HasMany(() => TeacherPhoneNumbersModel)
+  declare phone_numbers: TeacherPhoneNumbersModel[];
 
   @Column({ allowNull: false })
   declare active: boolean;

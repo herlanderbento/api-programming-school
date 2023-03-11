@@ -6,15 +6,13 @@ export default class Address extends Entity {
   private _state: string;
   private _city: string;
   private _address: string;
-  private _phone: string;
 
-  constructor(state: string, city: string, address: string, phone: string) {
+  constructor(state: string, city: string, address: string) {
     super();
 
     this._state = state;
     this._city = city;
     this._address = address;
-    this._phone = phone;
     this.validate();
 
     if (this.notification.hasErrors())
@@ -43,14 +41,6 @@ export default class Address extends Entity {
 
   public changeAddress(address: string) {
     this._address = address;
-  }
-
-  public get phone(): string {
-    return this._phone;
-  }
-
-  public changePhone(phone: string) {
-    this._phone = phone;
   }
 
   public validate(): void {
