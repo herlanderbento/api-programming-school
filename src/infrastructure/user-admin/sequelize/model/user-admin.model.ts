@@ -1,10 +1,9 @@
 import { Model, PrimaryKey, Column, Table } from 'sequelize-typescript';
 
 @Table({
-    tableName: "user_admin",
-    timestamps: false,
-  })
-  
+  tableName: 'user_admin',
+  timestamps: false,
+})
 export default class UserAdminModel extends Model {
   @PrimaryKey
   @Column
@@ -18,5 +17,4 @@ export default class UserAdminModel extends Model {
 
   @Column({ allowNull: false })
   declare password: string;
-
 }

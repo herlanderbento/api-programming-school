@@ -1,34 +1,33 @@
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
+import UserAdminMapper from '../mappers/user-admin.mapper';
 import UserAdminModel from '../model/user-admin.model';
 
 export default class UserAdminRepository
   implements UserAdminRepositoryInterface
 {
-  async create(entity: UserAdmin): Promise<void> {
-    const { id, name, email, password } = entity;
+  private _mapper: UserAdminMapper;
 
-    await UserAdminModel.create({ id, name, email, password });
+  constructor(mapper: UserAdminMapper) {
+    this._mapper = mapper;
+  }
+
+  async create(entity: UserAdmin): Promise<void> {
+    await UserAdminModel.create(this._mapper.toModel(entity));
   }
 
   async findById(id: string): Promise<UserAdmin> {
-    let userAdminModel;
     try {
-      userAdminModel = await UserAdminModel.findOne({
+      const userAdminModel = await UserAdminModel.findOne({
         where: {
           id,
         },
         rejectOnEmpty: true,
       });
+
+      return this._mapper.toEntity(userAdminModel);
     } catch (error) {
       throw new Error('user admin not found');
     }
-
-    return new UserAdmin(
-      userAdminModel.id,
-      userAdminModel.name,
-      userAdminModel.email,
-      userAdminModel.password
-    );
   }
 }
