@@ -1,4 +1,5 @@
 import Entity from '../../@shared/entity/entity.abstract';
+import StudentsValidatorFactory from '../factory/students.validator.factory';
 import Address from '../value-object/address';
 import StudentsPhoneNumbers from './students-phone-numbers';
 
