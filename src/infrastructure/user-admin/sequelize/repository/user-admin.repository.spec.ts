@@ -28,7 +28,7 @@ describe('User admin repository test', () => {
     await sequelize.close();
   });
 
-  it('should create a user admin', async () => {
+  it('should be able create a user admin', async () => {
     const userAdmin = new UserAdmin('123', 'admin', 'admin@gmail.com', '1234');
 
     await userAdminRepository.create(userAdmin);
@@ -40,7 +40,7 @@ describe('User admin repository test', () => {
     });
 
     expect(userAdminModel.toJSON()).toStrictEqual({
-      id: '123',
+      id: userAdmin.id,
       name: userAdmin.name,
       email: userAdmin.email,
       password: userAdmin.password,
