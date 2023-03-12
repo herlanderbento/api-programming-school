@@ -1,4 +1,5 @@
 import Entity from '../../@shared/entity/entity.abstract';
+import NotificationError from '../../@shared/notification/notification.error';
 import StudentsValidatorFactory from '../factory/students.validator.factory';
 import Address from '../value-object/address';
 import StudentsPhoneNumbers from './students-phone-numbers';
@@ -25,6 +26,10 @@ export default class Students extends Entity {
     this._name = email;
     this._password = password;
     this._phone_numbers = phone_numbers;
+    this.validate();
+
+    if (this.notification.hasErrors())
+      throw new NotificationError(this.notification.getErrors());
   }
 
   public get name(): string {
@@ -81,6 +86,10 @@ export default class Students extends Entity {
 
   public deactivate() {
     this._active = false;
+  }
+
+  public validate(): void {
+    StudentsValidatorFactory.create().validate(this);
   }
 
   set address(address: Address) {

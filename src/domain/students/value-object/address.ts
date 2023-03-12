@@ -1,4 +1,6 @@
 import Entity from '../../@shared/entity/entity.abstract';
+import NotificationError from '../../@shared/notification/notification.error';
+import StudentsAddressValidatorFactory from '../factory/students-address.validator.factory';
 
 export default class Address extends Entity {
   private _state: string;
@@ -11,6 +13,10 @@ export default class Address extends Entity {
     this._state = state;
     this._city = city;
     this._address = address;
+    this.validate();
+
+    if (this.notification.hasErrors())
+      throw new NotificationError(this.notification.getErrors());
   }
 
   public get state(): string {
@@ -35,5 +41,9 @@ export default class Address extends Entity {
 
   public changeAddress(address: string) {
     this._address = address;
+  }
+
+  public validate(): void {
+    StudentsAddressValidatorFactory.create().validate(this);
   }
 }

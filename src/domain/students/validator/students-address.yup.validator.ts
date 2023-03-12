@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import ValidatorInterface from '../../@shared/validator/validator.interface';
 import Address from '../value-object/address';
 
-export default class StudentAddressYupValidator
+export default class StudentsAddressYupValidator
   implements ValidatorInterface<Address>
 {
   validate(entity: Address): void {
