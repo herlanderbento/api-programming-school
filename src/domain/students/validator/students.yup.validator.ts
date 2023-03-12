@@ -13,7 +13,10 @@ export default class StudentsYupValidator
         .shape({
           id: yup.string().required('Id is required'),
           name: yup.string().required('Name is required'),
-          email: yup.string().email().required('Email is required'),
+          email: yup
+            .string()
+            .email('Email invalid format').matches(/^(?!.*@[^,]*,)/)
+            .required('Email is required'),
           password: yup.string().required('Password is required'),
         })
         .validateSync(

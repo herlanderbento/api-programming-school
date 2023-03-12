@@ -23,7 +23,7 @@ export default class Students extends Entity {
 
     this._id = id;
     this._name = name;
-    this._name = email;
+    this._email = email;
     this._password = password;
     this._phone_numbers = phone_numbers;
     this.validate();
