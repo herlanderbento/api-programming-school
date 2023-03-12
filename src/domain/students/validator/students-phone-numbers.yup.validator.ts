@@ -30,7 +30,7 @@ export default class StudentsPhoneNumbersYupValidator
 
       err.errors.forEach((error) => {
         entity.notification.addError({
-          context: 'students-phone-numbers',
+          context: 'students_phone_numbers',
           message: error,
         });
       });
