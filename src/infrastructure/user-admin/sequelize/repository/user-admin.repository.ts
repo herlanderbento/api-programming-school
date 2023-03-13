@@ -1,14 +1,14 @@
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
-import UserAdminMapper from '../mappers/user-admin.mapper';
+import UserAdminInterfaceMapper from '../mappers/interface/user-admin.interface.mapper';
 import UserAdminModel from '../model/user-admin.model';
 
 export default class UserAdminRepository
   implements UserAdminRepositoryInterface
 {
-  private _mapper: UserAdminMapper;
+  private _mapper: UserAdminInterfaceMapper;
 
-  constructor(mapper: UserAdminMapper) {
+  constructor(mapper: UserAdminInterfaceMapper) {
     this._mapper = mapper;
   }
 

@@ -1,12 +1,12 @@
 import { Sequelize } from 'sequelize-typescript';
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
-import UserAdminMapperImplementation from '../mappers/user-admin.mapper.implementation';
+import UserAdminImplementationMapper from '../mappers/implementation/user-admin.implementation.mapper';
 import UserAdminModel from '../model/user-admin.model';
 import UserAdminRepository from './user-admin.repository';
 
 describe('User admin repository test', () => {
-  const mappers = new UserAdminMapperImplementation();
+  const mappers = new UserAdminImplementationMapper();
   const userAdminRepository: UserAdminRepositoryInterface =
     new UserAdminRepository(mappers);
 

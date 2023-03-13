@@ -1,8 +1,10 @@
-import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
-import UserAdminModel from '../model/user-admin.model';
-import UserAdminMapper from './user-admin.mapper';
+import UserAdmin from '../../../../../domain/user-admin/entity/user-admin';
+import UserAdminModel from '../../model/user-admin.model';
+import UserAdminInterfaceMapper from '../interface/user-admin.interface.mapper';
 
-export default class UserAdminMapperImplementation implements UserAdminMapper {
+export default class UserAdminImplementationMapper
+  implements UserAdminInterfaceMapper
+{
   public toEntity(entity: UserAdminModel): UserAdmin {
     return new UserAdmin(entity.id, entity.name, entity.email, entity.password);
   }
