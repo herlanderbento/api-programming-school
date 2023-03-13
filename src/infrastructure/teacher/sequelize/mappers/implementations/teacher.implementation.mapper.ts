@@ -1,14 +1,14 @@
-import Teacher from '../../../../domain/teacher/entity/teacher';
-import Address from '../../../../domain/teacher/value-object/address';
-import TeacherModel from '../model/teacher.model';
-import TeacherPhoneNumbersMapper from './teacher-phone-numbers.mapper';
-import TeacherMapper from './teacher.mapper';
+import Teacher from '../../../../../domain/teacher/entity/teacher';
+import Address from '../../../../../domain/teacher/value-object/address';
+import TeacherModel from '../../model/teacher.model';
+import TeacherPhoneNumbersInterfaceMapper from '../interfaces/teacher-phone-numbers.interface.mapper';
+import TeacherMapper from '../interfaces/teacher.interface.mapper';
 
-export default class TeacherMapperImplementation implements TeacherMapper {
-  private _phoneNumbersMapper: TeacherPhoneNumbersMapper;
+export default class TeacherImplementationMapper implements TeacherMapper {
+  private _teacherPhoneNumbersMapper: TeacherPhoneNumbersInterfaceMapper;
 
-  constructor(phoneNumbersMapper: TeacherPhoneNumbersMapper) {
-    this._phoneNumbersMapper = phoneNumbersMapper;
+  constructor(teacherPhoneNumbersMapper: TeacherPhoneNumbersInterfaceMapper) {
+    this._teacherPhoneNumbersMapper = teacherPhoneNumbersMapper;
   }
 
   public toEntity(model: TeacherModel): Teacher {
@@ -17,7 +17,9 @@ export default class TeacherMapperImplementation implements TeacherMapper {
       model.name,
       model.email,
       model.password,
-      model.phone_numbers.map((item) => this._phoneNumbersMapper.toEntity(item))
+      model.phone_numbers.map((item) =>
+        this._teacherPhoneNumbersMapper.toEntity(item)
+      )
     );
 
     const address = new Address(model.state, model.city, model.address);

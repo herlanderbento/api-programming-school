@@ -3,16 +3,17 @@ import Teacher from '../../../../domain/teacher/entity/teacher';
 import TeacherRepositoryInterface from '../../../../domain/teacher/repository/teacher-repository.interface';
 import Address from '../../../../domain/teacher/value-object/address';
 import TeacherRepository from './teacher-repository';
-import TeacherPhoneNumbersMapperImplementation from '../mappers/teacher-phone-numbers.mapper.implementation';
-import TeacherMapperImplementation from '../mappers/teacher.mapper.implementation';
+
 import TeacherPhoneNumbers from '../../../../domain/teacher/entity/teacher-phone-numbers';
 import TeacherPhoneNumbersModel from '../model/teacher-phone-numbers.model';
 import TeacherModel from '../model/teacher.model';
+import TeacherImplementationMapper from '../mappers/implementations/teacher.implementation.mapper';
+import TeacherPhoneNumbersImplementationMapper from '../mappers/implementations/teacher-phone-numbers.implementation.mapper';
 
 describe('Integration test teacher repository', () => {
   const teacherPhoneNumbersMapper =
-    new TeacherPhoneNumbersMapperImplementation();
-  const teacherMapper = new TeacherMapperImplementation(
+    new TeacherPhoneNumbersImplementationMapper();
+  const teacherMapper = new TeacherImplementationMapper(
     teacherPhoneNumbersMapper
   );
   const teacherRepository: TeacherRepositoryInterface = new TeacherRepository(

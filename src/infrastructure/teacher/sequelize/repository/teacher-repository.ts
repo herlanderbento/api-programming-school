@@ -1,14 +1,14 @@
 import Teacher from '../../../../domain/teacher/entity/teacher';
 import TeacherRepositoryInterface from '../../../../domain/teacher/repository/teacher-repository.interface';
+import TeacherInterfaceMapper from '../mappers/interfaces/teacher.interface.mapper';
 import TeacherPhoneNumbersModel from '../model/teacher-phone-numbers.model';
 import TeacherModel from '../model/teacher.model';
-import TeacherMapper from '../mappers/teacher.mapper';
 
 export default class TeacherRepository implements TeacherRepositoryInterface {
-  private _mapper: TeacherMapper;
+  private _mapper: TeacherInterfaceMapper;
 
-  constructor(teacherMapper: TeacherMapper) {
-    this._mapper = teacherMapper;
+  constructor(teacherInterfaceMapper: TeacherInterfaceMapper) {
+    this._mapper = teacherInterfaceMapper;
   }
 
   async create(entity: Teacher): Promise<void> {
