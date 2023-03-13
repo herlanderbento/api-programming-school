@@ -1,8 +1,8 @@
 import Students from '../../../../../domain/students/entity/students';
 import Address from '../../../../../domain/students/value-object/address';
 import StudentsModel from '../../models/students.model';
-import StudentsPhoneNumbersInterfaceMapper from '../interface/students-phone-numbers.interface.mapper';
-import StudentsInterfaceMapper from '../interface/students.interface.mapper';
+import StudentsPhoneNumbersInterfaceMapper from '../interfaces/students-phone-numbers.interface.mapper';
+import StudentsInterfaceMapper from '../interfaces/students.interface.mapper';
 
 export default class StudentImplementationMapper
   implements StudentsInterfaceMapper

@@ -1,6 +1,6 @@
 import StudentsPhoneNumbers from '../../../../../domain/students/entity/students-phone-numbers';
 import StudentsPhoneNumbersModel from '../../models/students-phone-numbers.model';
-import StudentsPhoneNumbersInterfaceMapper from '../interface/students-phone-numbers.interface.mapper';
+import StudentsPhoneNumbersInterfaceMapper from '../interfaces/students-phone-numbers.interface.mapper';
 
 export default class StudentsPhoneNumbersImplementationMapper
   implements StudentsPhoneNumbersInterfaceMapper
