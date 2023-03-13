@@ -4,7 +4,7 @@ import StudentsModel from '../../models/students.model';
 import StudentsPhoneNumbersInterfaceMapper from '../interfaces/students-phone-numbers.interface.mapper';
 import StudentsInterfaceMapper from '../interfaces/students.interface.mapper';
 
-export default class StudentImplementationMapper
+export default class StudentsImplementationMapper
   implements StudentsInterfaceMapper
 {
   private _studentsPhoneNumbersMapper: StudentsPhoneNumbersInterfaceMapper;

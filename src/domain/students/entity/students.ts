@@ -8,8 +8,8 @@ export default class Students extends Entity {
   private _name: string;
   private _email: string;
   private _password: string;
-  private _phone_numbers: StudentsPhoneNumbers[];
   private _address!: Address;
+  private _phone_numbers: StudentsPhoneNumbers[];
   private _active: boolean = false;
 
   constructor(

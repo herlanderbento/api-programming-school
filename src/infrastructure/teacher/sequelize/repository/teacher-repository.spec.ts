@@ -17,7 +17,7 @@ describe('Integration test teacher repository', () => {
     teacherPhoneNumbersMapper
   );
   const teacherRepository: TeacherRepositoryInterface = new TeacherRepository(
-    teacherMapper
+    teacherMapper,
   );
 
   let sequelize: Sequelize;

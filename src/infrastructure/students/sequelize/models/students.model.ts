@@ -22,9 +22,6 @@ export default class StudentsModel extends Model {
   @Column({ allowNull: false })
   declare email: string;
 
-  @HasMany(() => StudentsPhoneNumbersModel)
-  declare phone_numbers: StudentsPhoneNumbersModel[];
-
   @Column({ allowNull: false })
   declare password: string;
 
@@ -36,6 +33,9 @@ export default class StudentsModel extends Model {
 
   @Column({ allowNull: false })
   declare address: string;
+
+  @HasMany(() => StudentsPhoneNumbersModel)
+  declare phone_numbers: StudentsPhoneNumbersModel[];
 
   @Column({ allowNull: false })
   declare active: boolean;
