@@ -1,8 +1,8 @@
 import Teacher from '../../../../domain/teacher/entity/teacher';
 import TeacherRepositoryInterface from '../../../../domain/teacher/repository/teacher-repository.interface';
 import TeacherInterfaceMapper from '../mappers/interfaces/teacher.interface.mapper';
-import TeacherPhoneNumbersModel from '../model/teacher-phone-numbers.model';
-import TeacherModel from '../model/teacher.model';
+import TeacherPhoneNumbersModel from '../models/teacher-phone-numbers.model';
+import TeacherModel from '../models/teacher.model';
 
 export default class TeacherRepository implements TeacherRepositoryInterface {
   private _mapper: TeacherInterfaceMapper;

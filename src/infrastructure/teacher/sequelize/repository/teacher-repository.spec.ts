@@ -5,8 +5,8 @@ import Address from '../../../../domain/teacher/value-object/address';
 import TeacherRepository from './teacher-repository';
 
 import TeacherPhoneNumbers from '../../../../domain/teacher/entity/teacher-phone-numbers';
-import TeacherPhoneNumbersModel from '../model/teacher-phone-numbers.model';
-import TeacherModel from '../model/teacher.model';
+import TeacherPhoneNumbersModel from '../models/teacher-phone-numbers.model';
+import TeacherModel from '../models/teacher.model';
 import TeacherImplementationMapper from '../mappers/implementations/teacher.implementation.mapper';
 import TeacherPhoneNumbersImplementationMapper from '../mappers/implementations/teacher-phone-numbers.implementation.mapper';
 

@@ -1,6 +1,6 @@
 import Teacher from '../../../../../domain/teacher/entity/teacher';
 import Address from '../../../../../domain/teacher/value-object/address';
-import TeacherModel from '../../model/teacher.model';
+import TeacherModel from '../../models/teacher.model';
 import TeacherPhoneNumbersInterfaceMapper from '../interfaces/teacher-phone-numbers.interface.mapper';
 import TeacherMapper from '../interfaces/teacher.interface.mapper';
 
