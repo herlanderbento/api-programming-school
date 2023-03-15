@@ -2,6 +2,8 @@ import {
   BelongsTo,
   Column,
   ForeignKey,
+  HasMany,
+  HasOne,
   Model,
   PrimaryKey,
   Table,
@@ -20,9 +22,6 @@ export default class CoursesModel extends Model {
   @ForeignKey(() => TeacherModel)
   @Column({ allowNull: false })
   declare teacher_id: string;
-
-  @BelongsTo(() => TeacherModel)
-  declare teacher: TeacherModel;
 
   @Column({ allowNull: false })
   declare name: string;

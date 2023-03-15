@@ -3,3 +3,5 @@ import Teacher from '../entity/teacher';
 
 export default interface TeacherRepositoryInterface
   extends RepositoryInterface<Teacher> {}
+
+  

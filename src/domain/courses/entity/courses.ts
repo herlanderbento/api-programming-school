@@ -8,7 +8,7 @@ export default class Courses extends Entity {
   private _teacherId: string;
   private _startDate: Date;
   private _endDate: Date;
-  private _active: boolean = false;
+  private _active: boolean;
 
   constructor(
     id: string,
@@ -16,6 +16,7 @@ export default class Courses extends Entity {
     name: string,
     startDate: Date,
     endDate: Date,
+    active: boolean
   ) {
     super();
 
@@ -24,6 +25,7 @@ export default class Courses extends Entity {
     this._name = name;
     this._startDate = startDate;
     this._endDate = endDate;
+    this._active = active;
     this.validate();
 
     if (this.notification.hasErrors())
@@ -37,7 +39,7 @@ export default class Courses extends Entity {
   public changeTeacherId(teacherId: string) {
     this._teacherId = teacherId;
   }
-  
+
   public get name(): string {
     return this._name;
   }
@@ -62,8 +64,12 @@ export default class Courses extends Entity {
     this._endDate = endDate;
   }
 
-  public isActive(): boolean {
+  public get isActive(): boolean {
     return this._active;
+  }
+
+  public changeIsActive(active: boolean) {
+    this._active = active;
   }
 
   public validate(): void {

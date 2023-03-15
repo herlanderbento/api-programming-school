@@ -1,4 +1,3 @@
-import Teacher from '../../teacher/entity/teacher';
 import Courses from './courses';
 
 describe('Unit tests courses', () => {
@@ -7,7 +6,7 @@ describe('Unit tests courses', () => {
       let startDate = new Date('2022-02-26T22:42:16.652Z');
       let endDate = new Date('2022-03-26T22:42:16.652Z');
 
-      new Courses('', '123', 'courses', startDate, endDate);
+      new Courses('', '123', 'courses', startDate, endDate, false);
     }).toThrowError('courses: Id is required');
   });
 
@@ -16,7 +15,7 @@ describe('Unit tests courses', () => {
       let startDate = new Date('2022-02-26T22:42:16.652Z');
       let endDate = new Date('2022-03-26T22:42:16.652Z');
 
-      new Courses('123', '123', '', startDate, endDate);
+      new Courses('123', '123', '', startDate, endDate, false);
     }).toThrowError('courses: Name is required');
   });
 
@@ -25,7 +24,7 @@ describe('Unit tests courses', () => {
       let startDate = new Date('2022-02-26T22:42:16.652Z');
       let endDate = new Date('2022-03-26T22:42:16.652Z');
 
-      new Courses('123', '', 'courses', startDate, endDate);
+      new Courses('123', '', 'courses', startDate, endDate, true);
     }).toThrowError('courses: Teacher id is required');
   });
 
@@ -36,9 +35,9 @@ describe('Unit tests courses', () => {
         '123',
         'courses',
         new Date('2022-02-26'),
-        new Date('2021-02-26')
+        new Date('2021-02-26'),
+        true
       );
     }).toThrowError(`courses: End date can't be before Start date`);
   });
-  
 });

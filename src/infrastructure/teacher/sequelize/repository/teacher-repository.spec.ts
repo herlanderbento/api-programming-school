@@ -9,6 +9,7 @@ import TeacherPhoneNumbersModel from '../models/teacher-phone-numbers.model';
 import TeacherModel from '../models/teacher.model';
 import TeacherImplementationMapper from '../mappers/implementations/teacher.implementation.mapper';
 import TeacherPhoneNumbersImplementationMapper from '../mappers/implementations/teacher-phone-numbers.implementation.mapper';
+import CoursesModel from '../../../courses/sequelize/model/courses.model';
 
 describe('Integration test teacher repository', () => {
   const teacherPhoneNumbersMapper =
@@ -30,7 +31,7 @@ describe('Integration test teacher repository', () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([TeacherModel, TeacherPhoneNumbersModel]);
+    sequelize.addModels([TeacherModel, TeacherPhoneNumbersModel, CoursesModel]);
     await sequelize.sync();
   });
 

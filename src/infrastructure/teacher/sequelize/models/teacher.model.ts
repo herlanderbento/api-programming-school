@@ -1,10 +1,12 @@
 import {
+  BelongsTo,
   Column,
   HasMany,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import CoursesModel from '../../../courses/sequelize/model/courses.model';
 import TeacherPhoneNumbersModel from './teacher-phone-numbers.model';
 
 @Table({
