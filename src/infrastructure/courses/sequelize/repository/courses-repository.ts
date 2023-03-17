@@ -1,6 +1,5 @@
 import Courses from '../../../../domain/courses/entity/courses';
 import CoursesRepositoryInterface from '../../../../domain/courses/repository/courses-repository.interface';
-import TeacherModel from '../../../teacher/sequelize/models/teacher.model';
 import CoursesInterfaceMapper from '../mappers/interface/courses.interface.mapper';
 import CoursesModel from '../model/courses.model';
 
@@ -29,7 +28,7 @@ export default class CoursesRepository implements CoursesRepositoryInterface {
           id,
         },
         rejectOnEmpty: true,
-        include: ['teacher'],
+        // include: ['teacher'],
       });
       return this._mapper.toEntity(courses);
     } catch (error) {
@@ -39,7 +38,7 @@ export default class CoursesRepository implements CoursesRepositoryInterface {
 
   public async findAll(): Promise<Courses[]> {
     const courses = await this._coursesModel.findAll({
-      include: ['teacher'],
+      // include: ['teacher'],
     });
 
     return courses.map((course) => this._mapper.toEntity(course));
