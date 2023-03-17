@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+
 import Courses from '../../../../domain/courses/entity/courses';
 import TeacherPhoneNumbersModel from '../../../teacher/sequelize/models/teacher-phone-numbers.model';
 import TeacherModel from '../../../teacher/sequelize/models/teacher.model';
