@@ -12,8 +12,7 @@ describe('Integration test user admin', () => {
     new UserAdminRepository(mappers);
 
   const createUserAdminUseCases = new CreateUserAdminUseCases(
-    userAdminRepository,
-    UserAdminModel
+    userAdminRepository
   );
 
   let sequelize: Sequelize;

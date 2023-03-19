@@ -8,7 +8,7 @@ import {
 } from './create.user-admin.dto';
 
 export default class CreateUserAdminUseCases {
-  constructor(private userAdminRepository: UserAdminRepositoryInterface, private userAdminModel: typeof UserAdminModel) {}
+  constructor(private userAdminRepository: UserAdminRepositoryInterface) {}
 
   public async execute(
     input: InputCreateUserAdminDto
