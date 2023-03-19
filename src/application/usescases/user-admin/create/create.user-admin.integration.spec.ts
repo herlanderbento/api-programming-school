@@ -6,6 +6,7 @@ import UserAdminModel from '../../../../infrastructure/user-admin/sequelize/mode
 import UserAdminRepository from '../../../../infrastructure/user-admin/sequelize/repository/user-admin.repository';
 import CreateUserAdminUseCases from './create.user-admin.usecases';
 
+
 describe('Integration test user admin', () => {
   const mappers = new UserAdminImplementationMapper();
   const userAdminRepository: UserAdminRepositoryInterface =

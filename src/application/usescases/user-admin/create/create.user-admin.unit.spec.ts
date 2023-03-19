@@ -1,6 +1,4 @@
-import Id from '../../../../domain/@shared/value-object/id.value-object';
-import UserAdminFactory from '../../../../domain/user-admin/factory/user-admin.factory';
-import UserAdminModel from '../../../../infrastructure/user-admin/sequelize/model/user-admin.model';
+
 import CreateUserAdminUseCases from './create.user-admin.usecases';
 
 const UserAdminMockRepository = () => {
@@ -16,7 +14,6 @@ describe('Unit tests user admin usecases', () => {
     const userAdminRepository = UserAdminMockRepository();
     const createUserAdminUseCases = new CreateUserAdminUseCases(
       userAdminRepository,
-      UserAdminModel
     );
 
     const input = {
