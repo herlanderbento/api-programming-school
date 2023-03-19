@@ -1,6 +1,4 @@
-import { randomUUID } from 'node:crypto';
 import { Sequelize } from 'sequelize-typescript';
-import { string } from 'yup';
 import Id from '../../../../domain/@shared/value-object/id.value-object';
 
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
@@ -33,68 +31,70 @@ describe('User admin repository test', () => {
   });
 
   it('should be able create a user admin', async () => {
-    const input = {
-      id: new Id('1'),
+    const userAdmin = new UserAdmin({
       name: 'Admin',
       email: 'admin@gmail.com',
       password: '1234',
-    };
-
-    const userAdmin = new UserAdmin(input);
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
     await userAdminRepository.create(userAdmin);
 
-    const userAdminModel = await UserAdminModel.findOne({
+    const result = await UserAdminModel.findOne({
       where: {
-        id: String(userAdmin.id),
+        id: userAdmin.id,
       },
     });
 
-    expect(userAdminModel.toJSON()).toStrictEqual({
-      id: String(userAdmin.id),
-      name: userAdmin.name,
-      email: userAdmin.email,
-      password: userAdmin.password,
-    });
+    expect(result.id).toEqual(userAdmin.id);
+    expect(result.name).toEqual(userAdmin.name);
+    expect(result.email).toEqual(userAdmin.email);
+    expect(result.password).toEqual(userAdmin.password);
+    expect(result.createdAt).toStrictEqual(userAdmin.createdAt);
+    expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
   });
 
   it('should be able find a user admin ', async () => {
-    const input = {
-      id: new Id('1'),
+    const userAdmin = new UserAdmin({
       name: 'Admin',
       email: 'admin@gmail.com',
       password: '1234',
-    };
-
-    let userAdmin = new UserAdmin(input);
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
     await userAdminRepository.create(userAdmin);
 
-    let userAdminResult = await userAdminRepository.findById(
-      String(userAdmin.id)
-    );
+    const result = await userAdminRepository.findById(userAdmin.id);
 
-    expect(userAdminResult.id).toEqual(String(userAdmin.id));
+    expect(result.id).toBeDefined();
+    expect(result.name).toEqual(userAdmin.name);
+    expect(result.email).toEqual(userAdmin.email);
+    expect(result.password).toEqual(userAdmin.password);
+    expect(result.createdAt).toStrictEqual(userAdmin.createdAt);
+    expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
   });
 
   it('should be able find by email a user admin ', async () => {
-    const input = {
-      id: new Id('1'),
+    const userAdmin = new UserAdmin({
+      id: '1',
       name: 'Admin',
       email: 'admin@gmail.com',
       password: '1234',
-    };
-
-    let userAdmin = new UserAdmin(input);
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
     await userAdminRepository.create(userAdmin);
 
-    const result = await userAdminRepository.findByEmail(input.email);
+    const result = await userAdminRepository.findByEmail(userAdmin.email);
 
- 
-    expect(result.id).toEqual(String(input.id))
-    expect(result.name).toEqual(input.name);
-    expect(result.email).toEqual(input.email);
-    expect(result.password).toEqual(input.password);
+    expect(result.id).toEqual(userAdmin.id);
+    expect(result.name).toEqual(userAdmin.name);
+    expect(result.email).toEqual(userAdmin.email);
+    expect(result.password).toEqual(userAdmin.password);
+    expect(result.createdAt).toStrictEqual(userAdmin.createdAt);
+    expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
   });
 });

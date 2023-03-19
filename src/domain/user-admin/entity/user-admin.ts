@@ -1,11 +1,10 @@
 import NotificationError from '../../@shared/notification/notification.error';
 import UserAdminValidatorFactory from '../factory/user-admin.validator.factory';
 import BaseEntity from '../../@shared/entity/base.entity';
-import Id from '../../@shared/value-object/id.value-object';
 import AggregateRoot from '../../@shared/entity/aggregate-root.interface';
 
 type UserAdminProps = {
-  id?: Id;
+  id?: string;
   name: string;
   email: string;
   password: string;

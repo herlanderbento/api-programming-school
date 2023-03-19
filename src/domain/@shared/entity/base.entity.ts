@@ -1,21 +1,21 @@
-import Id from '../value-object/id.value-object';
 import Notification from '../notification/notification';
+import { randomUUID } from 'node:crypto';
 
 export default class BaseEntity {
-  private _id: Id;
+  private _id: string;
   private _createdAt: Date;
   private _updatedAt: Date;
   public notification: Notification;
 
-  constructor(id?: Id, createdAt?: Date, updatedAt?: Date) {
-    this._id = id || new Id();
+  constructor(id?: string, createdAt?: Date, updatedAt?: Date) {
+    this._id = id || randomUUID();
     this._createdAt = createdAt || new Date();
     this._updatedAt = updatedAt || new Date();
 
     this.notification = new Notification();
   }
 
-  get id(): Id  {
+  get id(): string {
     return this._id;
   }
 

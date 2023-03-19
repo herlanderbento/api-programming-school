@@ -1,19 +1,17 @@
 import { Sequelize } from 'sequelize-typescript';
+import Id from '../../../../domain/@shared/value-object/id.value-object';
+import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
 import UserAdminImplementationMapper from '../../../../infrastructure/user-admin/sequelize/mappers/implementation/user-admin.implementation.mapper';
 import UserAdminModel from '../../../../infrastructure/user-admin/sequelize/model/user-admin.model';
 import UserAdminRepository from '../../../../infrastructure/user-admin/sequelize/repository/user-admin.repository';
-import CreateUserAdminUseCases from './create.user-admin.usecases';
+import CreateUserAdminUseCases from '../create/create.user-admin.usecases';
+import FindUserAdminUseCases from './find.user-admin.usecases';
 
-
-describe('Integration test user admin', () => {
+describe('Integration find user admin tests', () => {
   const mappers = new UserAdminImplementationMapper();
   const userAdminRepository: UserAdminRepositoryInterface =
     new UserAdminRepository(mappers);
-
-  const createUserAdminUseCases = new CreateUserAdminUseCases(
-    userAdminRepository
-  );
 
   let sequelize: Sequelize;
 
@@ -33,30 +31,35 @@ describe('Integration test user admin', () => {
     await sequelize.close();
   });
 
-  it('should be able a create user admin use cases', async () => {
-    const input = {
-      name: 'admin',
-      email: 'admin@gmail.com',
-      password: '123',
-    };
+  it('should find a user admin', async () => {
+    const findUserAdminUseCases = new FindUserAdminUseCases(
+      userAdminRepository
+    );
 
-    const result = await createUserAdminUseCases.execute(input);
+    const userAdmin = new UserAdmin({
+      id: 'ffd57d87-705a-42b5-8cf2-bb11e3de3398',
+      name: 'admin',
+      email: 'admin@admin.com',
+      password: 'admin',
+    });
+
+    await userAdminRepository.create(userAdmin);
+
+    const input = {
+      id: 'ffd57d87-705a-42b5-8cf2-bb11e3de3398',
+    };
 
     const output = {
-      id: result.id,
-      name: result.name,
-      email: result.email,
-      password: result.password,
-      createdAt: result.createdAt,
-      updatedAt: result.updatedAt,
+      id: userAdmin.id,
+      name: userAdmin.name,
+      email: userAdmin.email,
+      password: userAdmin.password,
+      createdAt: userAdmin.createdAt,
+      updatedAt: userAdmin.updatedAt,
     };
 
+    const result = await findUserAdminUseCases.execute(input);
+
     expect(result).toEqual(output);
-    expect(result.id).toBeDefined();
-    expect(result.name).toEqual(input.name);
-    expect(result.email).toEqual(input.email);
-    expect(result.password).toEqual(input.password);
-    expect(result.createdAt).toBeDefined();
-    expect(result.updatedAt).toBeDefined();
   });
 });

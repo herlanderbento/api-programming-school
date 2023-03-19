@@ -17,7 +17,7 @@ export default class CreateUserAdminUseCases {
     await this.userAdminRepository.create(userAdmin);
 
     return {
-      id: String(userAdmin.id),
+      id: userAdmin.id,
       name: userAdmin.name,
       email: userAdmin.email,
       password: userAdmin.password,

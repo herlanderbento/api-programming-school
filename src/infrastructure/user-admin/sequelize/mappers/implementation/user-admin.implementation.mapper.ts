@@ -7,21 +7,12 @@ export default class UserAdminImplementationMapper
   implements UserAdminInterfaceMapper
 {
   public toEntity(entity: UserAdminModel): UserAdmin {
-    const userAdmin = {
-      id: new Id(entity.id),
-      name: entity.name,
-      email: entity.email,
-      password: entity.password,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-    };
-
-    return new UserAdmin(userAdmin);
+    return new UserAdmin(entity);
   }
 
   public toModel(entity: UserAdmin) {
     return {
-      id: String(entity.id),
+      id: entity.id,
       name: entity.name,
       email: entity.email,
       password: entity.password,

@@ -1,3 +1,4 @@
+import Id from '../../../../domain/@shared/value-object/id.value-object';
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
 import UserAdminInterfaceMapper from '../mappers/interface/user-admin.interface.mapper';
@@ -25,9 +26,7 @@ export default class UserAdminRepository
         rejectOnEmpty: true,
       });
 
-      const entity = this._mapper.toEntity(userAdminModel);
-
-      return this._mapper.toModel(entity);
+      return this._mapper.toEntity(userAdminModel);
     } catch (error) {
       throw new Error('user admin not found');
     }
@@ -41,8 +40,6 @@ export default class UserAdminRepository
       rejectOnEmpty: true,
     });
 
-    const entity = this._mapper.toEntity(userAdminModel);
-
-    return this._mapper.toModel(entity);
+    return this._mapper.toEntity(userAdminModel);
   }
 }
