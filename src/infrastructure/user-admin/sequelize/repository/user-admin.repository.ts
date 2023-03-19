@@ -12,11 +12,11 @@ export default class UserAdminRepository
     this._mapper = mapper;
   }
 
-  async create(entity: UserAdmin): Promise<void> {
+  public async create(entity: UserAdmin): Promise<void> {
     await UserAdminModel.create(this._mapper.toModel(entity));
   }
 
-  async findById(id: string): Promise<UserAdmin> {
+  public async findById(id: string): Promise<UserAdmin> {
     try {
       const userAdminModel = await UserAdminModel.findOne({
         where: {
@@ -25,9 +25,24 @@ export default class UserAdminRepository
         rejectOnEmpty: true,
       });
 
-      return this._mapper.toEntity(userAdminModel);
+      const entity = this._mapper.toEntity(userAdminModel);
+
+      return this._mapper.toModel(entity);
     } catch (error) {
       throw new Error('user admin not found');
     }
+  }
+
+  public async findByEmail(email: string): Promise<UserAdmin> {
+    const userAdminModel = await UserAdminModel.findOne({
+      where: {
+        email,
+      },
+      rejectOnEmpty: true,
+    });
+
+    const entity = this._mapper.toEntity(userAdminModel);
+
+    return this._mapper.toModel(entity);
   }
 }

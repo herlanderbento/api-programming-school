@@ -10,14 +10,14 @@ export default class UserAdminYupValidator
       yup
         .object()
         .shape({
-          id: yup.string().required('Id is required'),
+          // id: yup.string().required('Id is required'),
           name: yup.string().required('Name is required'),
           email: yup.string().email().required('Email is required'),
           password: yup.string().required('Password is required'),
         })
         .validateSync(
           {
-            id: entity.id,
+            // id: entity.id,
             name: entity.name,
             email: entity.email,
             password: entity.password,

@@ -1,4 +1,6 @@
-import { Model, PrimaryKey, Column, Table } from 'sequelize-typescript';
+import { Model, PrimaryKey, Column, Table, DataType } from 'sequelize-typescript';
+import Id from '../../../../domain/@shared/value-object/id.value-object';
+import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 
 @Table({
   tableName: 'user_admin',
@@ -6,8 +8,8 @@ import { Model, PrimaryKey, Column, Table } from 'sequelize-typescript';
 })
 export default class UserAdminModel extends Model {
   @PrimaryKey
-  @Column
-  declare id: string;
+  @Column({ allowNull: false, type: DataType.UUID })
+  declare id: string
 
   @Column({ allowNull: false })
   declare name: string;
@@ -17,4 +19,5 @@ export default class UserAdminModel extends Model {
 
   @Column({ allowNull: false })
   declare password: string;
+
 }
