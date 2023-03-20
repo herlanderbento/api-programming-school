@@ -1,4 +1,3 @@
-import Id from '../../../../domain/@shared/value-object/id.value-object';
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
 import UserAdminInterfaceMapper from '../mappers/interface/user-admin.interface.mapper';
@@ -7,19 +6,28 @@ import UserAdminModel from '../model/user-admin.model';
 export default class UserAdminRepository
   implements UserAdminRepositoryInterface
 {
-  private _mapper: UserAdminInterfaceMapper;
-
-  constructor(mapper: UserAdminInterfaceMapper) {
-    this._mapper = mapper;
-  }
+  constructor(
+    private _mapper: UserAdminInterfaceMapper,
+    private userAdminRepository: typeof UserAdminModel
+  ) {}
 
   public async create(entity: UserAdmin): Promise<void> {
-    await UserAdminModel.create(this._mapper.toModel(entity));
+    const userAdminAlreadyExists = await this.userAdminRepository.findOne({
+      where: {
+        email: entity.email,
+      },
+    });
+
+    if (userAdminAlreadyExists) {
+      throw new Error('UserAdmin already exists');
+    }
+
+    await this.userAdminRepository.create(this._mapper.toModel(entity));
   }
 
   public async findById(id: string): Promise<UserAdmin> {
     try {
-      const userAdminModel = await UserAdminModel.findOne({
+      const userAdminModel = await this.userAdminRepository.findOne({
         where: {
           id,
         },
@@ -33,13 +41,17 @@ export default class UserAdminRepository
   }
 
   public async findByEmail(email: string): Promise<UserAdmin> {
-    const userAdminModel = await UserAdminModel.findOne({
-      where: {
-        email,
-      },
-      rejectOnEmpty: true,
-    });
+    try {
+      const userAdminModel = await this.userAdminRepository.findOne({
+        where: {
+          email,
+        },
+        rejectOnEmpty: true,
+      });
 
-    return this._mapper.toEntity(userAdminModel);
+      return this._mapper.toEntity(userAdminModel);
+    } catch (error) {
+      throw new Error('user admin not found ');
+    }
   }
 }

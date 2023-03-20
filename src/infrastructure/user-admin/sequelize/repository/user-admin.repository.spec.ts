@@ -1,6 +1,4 @@
 import { Sequelize } from 'sequelize-typescript';
-import Id from '../../../../domain/@shared/value-object/id.value-object';
-
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
 import UserAdminImplementationMapper from '../mappers/implementation/user-admin.implementation.mapper';
@@ -10,7 +8,7 @@ import UserAdminRepository from './user-admin.repository';
 describe('User admin repository test', () => {
   const mappers = new UserAdminImplementationMapper();
   const userAdminRepository: UserAdminRepositoryInterface =
-    new UserAdminRepository(mappers);
+    new UserAdminRepository(mappers, UserAdminModel);
 
   let sequelize: Sequelize;
 
@@ -97,4 +95,30 @@ describe('User admin repository test', () => {
     expect(result.createdAt).toStrictEqual(userAdmin.createdAt);
     expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
   });
+
+  // it('should user admin already exists', async () => {
+  //   const userAdmin = new UserAdmin({
+  //     id: '1',
+  //     name: 'Admin',
+  //     email: 'admin@gmail.com',
+  //     password: '1234',
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   });
+
+  //   const userAdmin2 = new UserAdmin({
+  //     id: '1',
+  //     name: 'Admin',
+  //     email: 'admin@gmail.com',
+  //     password: '1234',
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   });
+
+  //   await userAdminRepository.create(userAdmin);
+
+  //   expect(async () => {
+  //     await userAdminRepository.create(userAdmin2);
+  //   }).rejects.toThrowError('UserAdmin already exists');
+  // });
 });

@@ -11,8 +11,7 @@ export default class CreateUserAdminUseCases {
   public async execute(
     input: InputCreateUserAdminDto
   ): Promise<OutputCreateUserAdminDto> {
-
-    const userAdmin = new UserAdmin(input)
+    const userAdmin = new UserAdmin(input);
 
     await this.userAdminRepository.create(userAdmin);
 
@@ -22,7 +21,7 @@ export default class CreateUserAdminUseCases {
       email: userAdmin.email,
       password: userAdmin.password,
       createdAt: userAdmin.createdAt,
-      updatedAt: userAdmin.updatedAt
+      updatedAt: userAdmin.updatedAt,
     };
   }
 }

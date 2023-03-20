@@ -1,17 +1,15 @@
 import { Sequelize } from 'sequelize-typescript';
-import Id from '../../../../domain/@shared/value-object/id.value-object';
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
 import UserAdminImplementationMapper from '../../../../infrastructure/user-admin/sequelize/mappers/implementation/user-admin.implementation.mapper';
 import UserAdminModel from '../../../../infrastructure/user-admin/sequelize/model/user-admin.model';
 import UserAdminRepository from '../../../../infrastructure/user-admin/sequelize/repository/user-admin.repository';
-import CreateUserAdminUseCases from '../create/create.user-admin.usecases';
 import FindUserAdminUseCases from './find.user-admin.usecases';
 
 describe('Integration find user admin tests', () => {
   const mappers = new UserAdminImplementationMapper();
   const userAdminRepository: UserAdminRepositoryInterface =
-    new UserAdminRepository(mappers);
+    new UserAdminRepository(mappers, UserAdminModel);
 
   let sequelize: Sequelize;
 
