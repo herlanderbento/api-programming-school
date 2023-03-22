@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import { Sequelize } from 'sequelize-typescript';
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
@@ -34,11 +35,14 @@ describe('Integration find user admin tests', () => {
       userAdminRepository
     );
 
+    const passwordHash = await hash('123', 8);
+
+
     const userAdmin = new UserAdmin({
       id: 'ffd57d87-705a-42b5-8cf2-bb11e3de3398',
       name: 'admin',
       email: 'admin@admin.com',
-      password: 'admin',
+      password: passwordHash,
     });
 
     await userAdminRepository.create(userAdmin);

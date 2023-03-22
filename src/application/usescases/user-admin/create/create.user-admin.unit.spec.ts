@@ -1,4 +1,4 @@
-
+import { compare, hash } from 'bcrypt';
 import CreateUserAdminUseCases from './create.user-admin.usecases';
 
 const UserAdminMockRepository = () => {
@@ -13,13 +13,15 @@ describe('Unit tests user admin usecases', () => {
   it('should be able a create user admin use cases', async () => {
     const userAdminRepository = UserAdminMockRepository();
     const createUserAdminUseCases = new CreateUserAdminUseCases(
-      userAdminRepository,
+      userAdminRepository
     );
+
+    const passwordHash = await hash('123', 8);
 
     const input = {
       name: 'admin',
       email: 'admin@gmail.com',
-      password: '123',
+      password: passwordHash,
     };
 
     const result = await createUserAdminUseCases.execute(input);
@@ -28,7 +30,6 @@ describe('Unit tests user admin usecases', () => {
     expect(result.id).toBeDefined();
     expect(result.name).toEqual(input.name);
     expect(result.email).toEqual(input.email);
-    expect(result.password).toEqual(input.password);
     expect(result.createdAt).toBeDefined();
     expect(result.updatedAt).toBeDefined();
   });

@@ -118,8 +118,8 @@ describe('Integration tests courses repository', () => {
       '123',
       '123',
       'courses',
-      new Date('2022-02-26'),
-      new Date('2022-02-26'),
+      new Date(),
+      new Date(),
       true
     );
 
@@ -128,7 +128,7 @@ describe('Integration tests courses repository', () => {
       '1234',
       'Javascript Advance (React, NodeJs, NestJS )',
       new Date(),
-      new Date('2023-03-20'),
+      new Date(),
       false
     );
 

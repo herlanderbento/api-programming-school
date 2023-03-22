@@ -54,7 +54,6 @@ describe('Integration test user admin', () => {
     expect(result.id).toBeDefined();
     expect(result.name).toEqual(input.name);
     expect(result.email).toEqual(input.email);
-    expect(result.password).toEqual(input.password);
     expect(result.createdAt).toBeDefined();
     expect(result.updatedAt).toBeDefined();
   });

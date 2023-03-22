@@ -51,7 +51,7 @@ export default class UserAdminRepository
 
       return this._mapper.toEntity(userAdminModel);
     } catch (error) {
-      throw new Error('user admin not found ');
+      throw new Error('user admin not found');
     }
   }
 }
