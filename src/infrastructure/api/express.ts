@@ -15,9 +15,10 @@ async function setupDb() {
     dialect: 'sqlite',
     storage: ':memory:',
     logging: false,
+    sync: { force: true },
   });
 
-  sequelize.addModels([UserAdminModel]);
+  await sequelize.addModels([UserAdminModel]);
   await sequelize.sync();
 }
 

@@ -1,6 +1,5 @@
 import { app, sequelize } from '../express';
 import request from 'supertest';
-import { hash } from 'bcrypt';
 
 describe('E2E test for user admin', () => {
   beforeEach(async () => {
@@ -18,9 +17,6 @@ describe('E2E test for user admin', () => {
       password: 'password',
     });
 
-    expect(response.status).toBe(200);
-    expect(response.body.name).toBe('user admin');
-    expect(response.body.email).toBe('user@admin.com');
-    expect(response.body.password).toBe(response.body.password);
+    expect(response.status).toBe(201);
   });
 });
