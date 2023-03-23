@@ -2,9 +2,9 @@ import { randomUUID } from 'node:crypto';
 import Notification from '../notification/notification';
 
 export default class BaseEntity {
-  private _id: string;
-  private _createdAt: Date;
-  private _updatedAt: Date;
+  protected _id: string;
+  protected _createdAt: Date;
+  protected _updatedAt: Date;
   public notification: Notification;
 
   constructor(id?: string, createdAt?: Date, updatedAt?: Date) {

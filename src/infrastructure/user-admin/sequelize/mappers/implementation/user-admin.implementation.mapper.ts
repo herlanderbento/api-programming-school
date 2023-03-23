@@ -1,4 +1,4 @@
-import Id from '../../../../../domain/@shared/value-object/id.value-object';
+
 import UserAdmin from '../../../../../domain/user-admin/entity/user-admin';
 import UserAdminModel from '../../model/user-admin.model';
 import UserAdminInterfaceMapper from '../interface/user-admin.interface.mapper';

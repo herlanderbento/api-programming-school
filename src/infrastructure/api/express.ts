@@ -18,7 +18,7 @@ async function setupDb() {
     sync: { force: true },
   });
 
-  await sequelize.addModels([UserAdminModel]);
+  sequelize.addModels([UserAdminModel]);
   await sequelize.sync();
 }
 

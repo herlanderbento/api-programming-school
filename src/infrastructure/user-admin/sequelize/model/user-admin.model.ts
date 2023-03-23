@@ -3,10 +3,8 @@ import {
   PrimaryKey,
   Column,
   Table,
-  DataType,
 } from 'sequelize-typescript';
-import Id from '../../../../domain/@shared/value-object/id.value-object';
-import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
+
 
 @Table({
   tableName: 'user_admin',

@@ -1,5 +1,6 @@
 import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
+
 import TeacherValidatorFactory from '../factory/teacher.validator.factory';
 import Address from '../value-object/address';
 import TeacherPhoneNumbers from './teacher-phone-numbers';

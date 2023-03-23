@@ -1,6 +1,7 @@
-import Address from '../value-object/address';
 import PhoneNumbers from './teacher-phone-numbers';
 import Teacher from './teacher';
+import Address from '../value-object/address';
+
 
 describe('Unit test teacher', () => {
   it('should throw error when id is empty', () => {
