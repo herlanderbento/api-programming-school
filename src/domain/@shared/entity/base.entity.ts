@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+
 import Notification from '../notification/notification';
 
 export default class BaseEntity {

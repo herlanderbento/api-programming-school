@@ -26,7 +26,6 @@ export default class CreateUserAdminUseCases {
       id: userAdmin.id,
       name: userAdmin.name,
       email: userAdmin.email,
-      password: userAdmin.password,
       createdAt: userAdmin.createdAt,
       updatedAt: userAdmin.updatedAt,
     };

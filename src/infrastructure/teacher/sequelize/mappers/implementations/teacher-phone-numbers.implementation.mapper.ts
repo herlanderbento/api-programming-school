@@ -5,12 +5,11 @@ import TeacherPhoneNumbersInterfaceMapper from '../interfaces/teacher-phone-numb
 export default class TeacherPhoneNumbersImplementationMapper
   implements TeacherPhoneNumbersInterfaceMapper
 {
-  public toEntity({
-    id,
-    teacher_id,
-    phone,
-  }: TeacherPhoneNumbersModel): TeacherPhoneNumbers {
-    return new TeacherPhoneNumbers(id, teacher_id, phone);
+  public toEntity(model: TeacherPhoneNumbersModel): TeacherPhoneNumbers {
+    return new TeacherPhoneNumbers({
+      teacherId: model.teacher_id,
+      phone: model.phone,
+    });
   }
 
   public toModel(entity: TeacherPhoneNumbers) {

@@ -1,4 +1,4 @@
-import { compare, hash } from 'bcrypt';
+import { hash } from 'bcrypt';
 import CreateUserAdminUseCases from './create.user-admin.usecases';
 
 const UserAdminMockRepository = () => {

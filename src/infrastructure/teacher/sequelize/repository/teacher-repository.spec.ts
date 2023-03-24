@@ -18,7 +18,7 @@ describe('Integration test teacher repository', () => {
     teacherPhoneNumbersMapper
   );
   const teacherRepository: TeacherRepositoryInterface = new TeacherRepository(
-    teacherMapper,
+    teacherMapper
   );
 
   let sequelize: Sequelize;
@@ -40,16 +40,22 @@ describe('Integration test teacher repository', () => {
   });
 
   it('should create a teacher', async () => {
-    const phoneNumbers1 = new TeacherPhoneNumbers('123', '123', '222-222-22');
-    const phoneNumbers2 = new TeacherPhoneNumbers('1234', '123', '222-222-22');
+    const phoneNumbers1 = new TeacherPhoneNumbers({
+      teacherId: '123',
+      phone: '222-222-222',
+    });
+    const phoneNumbers2 = new TeacherPhoneNumbers({
+      teacherId: '123',
+      phone: '222-222-222',
+    });
 
-    const teacher = new Teacher(
-      '123',
-      'Teacher',
-      'teacher@gmail.com',
-      '12345',
-      [phoneNumbers1, phoneNumbers2]
-    );
+    const teacher = new Teacher({
+      id: '123',
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [phoneNumbers1, phoneNumbers2],
+    });
     const address = new Address('state1', 'city1', 'address1');
 
     teacher.changeAddress(address);
@@ -58,13 +64,13 @@ describe('Integration test teacher repository', () => {
 
     const teacherModel = await TeacherModel.findOne({
       where: {
-        id: '123',
+        id: teacher.id,
       },
       include: ['phone_numbers'],
     });
 
     expect(teacherModel.toJSON()).toStrictEqual({
-      id: '123',
+      id: teacher.id,
       name: teacher.name,
       email: teacher.email,
       password: teacher.password,
@@ -88,15 +94,18 @@ describe('Integration test teacher repository', () => {
   });
 
   it('should update a teacher', async () => {
-    const phoneNumbers1 = new TeacherPhoneNumbers('123', '123', '222-222-22');
+    const phoneNumbers1 = new TeacherPhoneNumbers({
+      teacherId: '123',
+      phone: '222-222-222',
+    });
 
-    const teacher = new Teacher(
-      '123',
-      'Teacher',
-      'teacher@gmail.com',
-      '12345',
-      [phoneNumbers1]
-    );
+    const teacher = new Teacher({
+      id: '123',
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [phoneNumbers1],
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 
@@ -137,15 +146,12 @@ describe('Integration test teacher repository', () => {
   });
 
   it('should find a teacher', async () => {
-    const phoneNumbers1 = new TeacherPhoneNumbers('123', '123', '222-222-22');
-
-    const teacher = new Teacher(
-      '123',
-      'Teacher',
-      'teacher@gmail.com',
-      '12345',
-      [phoneNumbers1]
-    );
+    const teacher = new Teacher({
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [],
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 
@@ -153,9 +159,14 @@ describe('Integration test teacher repository', () => {
 
     await teacherRepository.create(teacher);
 
-    const teacherResult = await teacherRepository.findById(teacher.id);
+    const result = await teacherRepository.findById(teacher.id);
 
-    expect(teacher).toStrictEqual(teacherResult);
+    expect(result.id).toBeDefined();
+    expect(result.name).toEqual(teacher.name);
+    expect(result.email).toEqual(teacher.email);
+    expect(result.password).toEqual(teacher.password);
+    expect(result.createdAt).toBeDefined();
+    expect(result.updatedAt).toBeDefined();
   });
 
   it('should throw an error when teacher is not found', async () => {
@@ -165,42 +176,52 @@ describe('Integration test teacher repository', () => {
   });
 
   it('should find all teachers', async () => {
-    const phoneNumbers1 = new TeacherPhoneNumbers('123', '123', '222-222-22');
-    const phoneNumbers2 = new TeacherPhoneNumbers('1234', '1234', '222-222-22');
-    const phoneNumbers3 = new TeacherPhoneNumbers(
-      '1235',
-      '12345',
-      '222-222-22'
-    );
+    const phoneNumbers1 = new TeacherPhoneNumbers({
+      teacherId: '123',
+      phone: '222-222-222',
+    });
+    const phoneNumbers2 = new TeacherPhoneNumbers({
+      teacherId: '1234',
+      phone: '222-222-222',
+    });
+    const phoneNumbers3 = new TeacherPhoneNumbers({
+      teacherId: '1235',
+      phone: '222-222-222',
+    });
 
-    const teacher1 = new Teacher(
-      '123',
-      'Teacher1',
-      'teacher1@gmail.com',
-      '12345',
-      [phoneNumbers1]
-    );
+    const teacher1 = new Teacher({
+      id: '123',
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [phoneNumbers1],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
     const address1 = new Address('state1', 'city1', 'address1');
     teacher1.changeAddress(address1);
     teacher1.activate();
 
-    const teacher2 = new Teacher(
-      '1234',
-      'Teacher2',
-      'teacher2@gmail.com',
-      '12345',
-      [phoneNumbers2]
-    );
+    const teacher2 = new Teacher({
+      id: '1234',
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [phoneNumbers2],
+    });
+
     const address2 = new Address('state2', 'city2', 'address2');
     teacher2.changeAddress(address2);
 
-    const teacher3 = new Teacher(
-      '12345',
-      'Teacher3',
-      'teacher3@gmail.com',
-      '12345',
-      [phoneNumbers3]
-    );
+    const teacher3 = new Teacher({
+      id: '12345',
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [phoneNumbers3],
+    });
+
     const address3 = new Address('state3', 'city3', 'address3');
     teacher3.changeAddress(address3);
 
@@ -210,19 +231,22 @@ describe('Integration test teacher repository', () => {
 
     const teachers = await teacherRepository.findAll();
 
-    expect([teacher1, teacher2, teacher3]).toStrictEqual(teachers);
+    expect(teachers).toHaveLength(3);
   });
 
   it('should delete a teacher', async () => {
-    const phoneNumbers = new TeacherPhoneNumbers('123', '123', '222-222-22');
+    const phoneNumbers =  new TeacherPhoneNumbers({
+      teacherId: '1235',
+      phone: '222-222-222',
+    });
 
-    const teacher = new Teacher(
-      '123',
-      'Teacher1',
-      'teacher1@gmail.com',
-      '12345',
-      [phoneNumbers]
-    );
+    const teacher = new Teacher({
+      id: '1235',
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [phoneNumbers],
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 

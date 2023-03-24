@@ -1,19 +1,30 @@
-import Entity from '../../@shared/entity/entity.abstract';
+import AggregateRoot from '../../@shared/entity/aggregate-root.interface';
+import BaseEntity from '../../@shared/entity/base.entity';
 import NotificationError from '../../@shared/notification/notification.error';
 import TeacherPhoneNumbersValidatorFactory from '../factory/teacher-phone-numbers.validator.factory';
 
+type TeacherPhoneNumbersProps = {
+  id?: string;
+  teacherId: string;
+  phone: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
 
-export default class TeacherPhoneNumbers extends Entity {
+export default class TeacherPhoneNumbers
+  extends BaseEntity
+  implements AggregateRoot
+{
   private _teacherId: string;
   private _phone: string;
 
-  constructor(id: string, teacherId: string, phone: string) {
-    super();
-    this._id = id;
-    this._phone = phone;
-    this._teacherId = teacherId;
-    this.validate()
-    
+  constructor(props: TeacherPhoneNumbersProps) {
+    super(props.id, props.createdAt, props.updatedAt);
+
+    this._phone = props.phone;
+    this._teacherId = props.teacherId;
+    this.validate();
+
     if (this.notification.hasErrors())
       throw new NotificationError(this.notification.getErrors());
   }

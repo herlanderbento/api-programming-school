@@ -45,7 +45,6 @@ describe('Integration test user admin', () => {
       id: result.id,
       name: result.name,
       email: result.email,
-      password: result.password,
       createdAt: result.createdAt,
       updatedAt: result.updatedAt,
     };

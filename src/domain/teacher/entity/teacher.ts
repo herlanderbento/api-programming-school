@@ -1,3 +1,5 @@
+import AggregateRoot from '../../@shared/entity/aggregate-root.interface';
+import BaseEntity from '../../@shared/entity/base.entity';
 import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
 
@@ -5,7 +7,17 @@ import TeacherValidatorFactory from '../factory/teacher.validator.factory';
 import Address from '../value-object/address';
 import TeacherPhoneNumbers from './teacher-phone-numbers';
 
-export default class Teacher extends Entity {
+export type TeacherEntityProps = {
+  id?: string;
+  name: string;
+  email: string;
+  password: string;
+  phone_numbers: any[];
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export default class Teacher extends BaseEntity implements AggregateRoot {
   private _name: string;
   private _email: string;
   private _password: string;
@@ -13,20 +25,13 @@ export default class Teacher extends Entity {
   private _phone_numbers: TeacherPhoneNumbers[];
   private _active: boolean = false;
 
-  constructor(
-    id: string,
-    name: string,
-    email: string,
-    password: string,
-    phone_numbers: TeacherPhoneNumbers[]
-  ) {
-    super();
+  constructor(props: TeacherEntityProps) {
+    super(props.id, props.createdAt, props.updatedAt);
 
-    this._id = id;
-    this._name = name;
-    this._email = email;
-    this._password = password;
-    this._phone_numbers = phone_numbers;
+    this._name = props.name;
+    this._email = props.email;
+    this._password = props.password;
+    this._phone_numbers = props.phone_numbers;
     this.validate();
 
     if (this.notification.hasErrors())

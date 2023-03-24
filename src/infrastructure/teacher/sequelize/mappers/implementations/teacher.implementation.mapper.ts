@@ -12,15 +12,15 @@ export default class TeacherImplementationMapper implements TeacherMapper {
   }
 
   public toEntity(model: TeacherModel): Teacher {
-    const teacher = new Teacher(
-      model.id,
-      model.name,
-      model.email,
-      model.password,
-      model.phone_numbers.map((item) =>
+    const teacher = new Teacher({
+      id: model.id,
+      name: model.name,
+      email: model.email,
+      password: model.password,
+      phone_numbers: model.phone_numbers.map((item) =>
         this._teacherPhoneNumbersMapper.toEntity(item)
-      )
-    );
+      ),
+    });
 
     const address = new Address(model.state, model.city, model.address);
 
