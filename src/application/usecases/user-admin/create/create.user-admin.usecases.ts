@@ -1,4 +1,5 @@
 import { hash } from 'bcrypt';
+import { inject, injectable } from 'tsyringe';
 import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
 import {
@@ -6,8 +7,12 @@ import {
   OutputCreateUserAdminDto,
 } from '../../../dtos/user-admin/create.user-admin.dto';
 
+// @injectable()
 export default class CreateUserAdminUseCases {
-  constructor(private userAdminRepository: UserAdminRepositoryInterface) {}
+  constructor(
+    // @inject('UserAdminRepository')
+    private userAdminRepository: UserAdminRepositoryInterface
+  ) {}
 
   public async execute(
     input: InputCreateUserAdminDto

@@ -6,7 +6,7 @@ type TeacherFactoryProps = {
   name: string;
   email: string;
   password: string;
-  phone_numbers: {
+  phone_numbers?: {
     id: string;
     teacherId: string;
     phone: string;

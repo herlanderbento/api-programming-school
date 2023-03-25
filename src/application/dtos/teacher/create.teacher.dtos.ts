@@ -6,8 +6,8 @@ export interface InputCreateTeacherDto {
   email: string;
   password: string;
   phone_numbers?: {
-    id: string;
-    teacherId: string;
+    id?: string;
+    teacherId?: string;
     phone: string;
   }[];
   address?: Address;
@@ -18,8 +18,8 @@ export interface OutputCreateTeacherDto {
   name: string;
   email: string;
   phone_numbers?: {
-    id: string;
-    teacherId: string;
+    id?: string;
+    teacherId?: string;
     phone: string;
   }[];
   address?: {
