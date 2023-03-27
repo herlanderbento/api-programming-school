@@ -10,6 +10,12 @@ export default class DeleteTeacherUseCases {
   public async execute(
     input: InputDeleteTeacherDtos
   ): Promise<OutputDeleteTeacherDtos> {
+    const teacher = await this.teacherRepository.findById(input.id);
+
+    if (!teacher) {
+      throw new Error('Teacher not found');
+    }
+
     await this.teacherRepository.delete(input.id);
 
     return {

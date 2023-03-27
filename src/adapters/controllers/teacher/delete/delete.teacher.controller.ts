@@ -8,7 +8,7 @@ export default class DeleteTeacherController {
     const output = await deleteTeacherUseCases.execute({ id });
 
     return response.format({
-      json: async () => response.send(output),
+      json: async () => response.status(200).send(output),
     });
   }
 }

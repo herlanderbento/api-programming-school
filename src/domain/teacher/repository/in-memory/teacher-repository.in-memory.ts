@@ -48,7 +48,11 @@ export default class TeacherRepositoryInMemory
   }
 
   public async findById(id: string): Promise<Teacher> {
-    return this.teacherRepository.find((teacher) => teacher.id === id);
+    try {
+      return this.teacherRepository.find((teacher) => teacher.id === id);
+    } catch (error) {
+      throw new Error('Teacher not found');
+    }
   }
   public async findAll(): Promise<Teacher[]> {
     return this.teacherRepository

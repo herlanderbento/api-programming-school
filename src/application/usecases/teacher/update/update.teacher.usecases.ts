@@ -14,7 +14,11 @@ export default class UpdateTeacherUseCases {
   ): Promise<OutputUpdateTeacherDto> {
     const teacher = await this.teacherRepository.findById(input.id);
 
-    teacher?.changeEmail(input.email);
+    if(!teacher){
+      throw new Error('Teacher not found');
+    }
+
+    teacher.changeEmail(input.email);
     teacher.changeEmail(input.email);
     teacher.changePhoneNumbers(
       input.phone_numbers.map((item) => {
@@ -24,6 +28,8 @@ export default class UpdateTeacherUseCases {
         });
       })
     );
+
+
     teacher.changeAddress(
       new Address(
         input.address.state,
