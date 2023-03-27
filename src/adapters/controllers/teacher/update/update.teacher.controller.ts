@@ -7,7 +7,7 @@ import Address from '../../../../domain/teacher/value-object/address';
 export default class UpdateTeacherController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { name, email,address, phone_numbers } = request.body;
+    const { name, email, address, phone_numbers } = request.body;
 
     const phoneNumbers = phone_numbers.map((item: any) => {
       return new TeacherPhoneNumbers({
@@ -22,15 +22,6 @@ export default class UpdateTeacherController {
       address.address
     );
 
-    // const InputUpdateTeacherProps = {
-    //   id,
-    //   name,
-    //   email,
-    //   password,
-    //   phone_numbers: phoneNumbers,
-    //   address: inputAddress,
-    // };
-
     const output = await updateTeacherUseCases.execute({
       id,
       name,
@@ -40,7 +31,9 @@ export default class UpdateTeacherController {
     });
 
     try {
-      return response.status(200).send(output);
+      return response.format({
+        json: async () => response.status(200).send(output),
+      });
     } catch (error) {
       return response.status(500).send(error);
     }

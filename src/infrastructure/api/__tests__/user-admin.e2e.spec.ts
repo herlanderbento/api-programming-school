@@ -26,14 +26,16 @@ describe('E2E test for user admin', () => {
   });
 
   it('should create a user admin', async () => {
-    const response = await request(app).post('/user-admin').send({
+    const response = await request(app).post('/api/user-admin').send({
       name: 'user admin',
       email: 'user@admin.com',
       password: 'password',
     });
 
     expect(response.status).toBe(201);
+  
   });
+
 
   // it('should be able to authenticate user admin', async () => {
   //   const userAdmin = await createUserAdminUseCases.execute({
@@ -44,7 +46,7 @@ describe('E2E test for user admin', () => {
 
   //   const response = await request(app).post('/user-admin/auth').send({
   //     email: userAdmin.email,
-  //     password: 'admin',
+  //     password: userAdmin.password,
   //   });
 
   //   expect(response.status).toBe(200);

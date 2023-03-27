@@ -1,3 +1,4 @@
+import AuthenticationTeacherUseCases from '../../../application/usecases/teacher/authentication/authentication.teacher.use-cases';
 import CreateTeacherUseCases from '../../../application/usecases/teacher/create/create.teacher.usecases';
 import DeleteTeacherUseCases from '../../../application/usecases/teacher/delete/delete.teacher.usecases';
 import ListTeacherUseCases from '../../../application/usecases/teacher/list/list.teacher.usecases';
@@ -30,3 +31,7 @@ export const deleteTeacherUseCases = new DeleteTeacherUseCases(
 );
 
 export const listTeacherUseCases = new ListTeacherUseCases(teacherRepository);
+
+export const authenticationTeacherUseCases = new AuthenticationTeacherUseCases(
+  teacherRepository
+);

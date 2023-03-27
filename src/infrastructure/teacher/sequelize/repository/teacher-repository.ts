@@ -46,6 +46,7 @@ export default class TeacherRepository implements TeacherRepositoryInterface {
   }
 
   async findByEmail(email: string): Promise<Teacher> {
+    try {
       const teacher = await this._model.findOne({
         where: {
           email,
@@ -54,12 +55,10 @@ export default class TeacherRepository implements TeacherRepositoryInterface {
         include: ['phone_numbers'],
       });
 
-      if(!teacher){
-        throw new Error('Teacher not found');
-      }
-
       return this._mapper.toEntity(teacher);
-    
+    } catch (error) {
+      throw new Error('Teacher not found');
+    }
   }
 
   async findAll(): Promise<Teacher[]> {

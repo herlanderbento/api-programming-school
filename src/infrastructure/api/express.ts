@@ -11,7 +11,7 @@ import '../@shared/container'
 export const app: Express = express();
 
 app.use(express.json());
-app.use(router);
+app.use('/api', router);
 
 export let sequelize: Sequelize;
 

@@ -28,7 +28,7 @@ describe('E2E test for teacher', () => {
 
   it('should be able create teacher', async () => {
     const response = await request(app)
-      .post('/teacher')
+      .post('/api/teacher')
       .send({
         name: 'teacher',
         email: 'teacher@gmail.com',
@@ -51,7 +51,7 @@ describe('E2E test for teacher', () => {
 
   it('should be able list all teachers', async () => {
     const response1 = await request(app)
-      .post('/teacher')
+      .post('/api/teacher')
       .send({
         name: 'teacher',
         email: 'teacher@gmail.com',
@@ -72,7 +72,7 @@ describe('E2E test for teacher', () => {
     expect(response1.status).toBe(201);
 
     const response2 = await request(app)
-      .post('/teacher')
+      .post('/api/teacher')
       .send({
         name: 'teacher',
         email: 'teacher@gmail.com',
@@ -92,7 +92,7 @@ describe('E2E test for teacher', () => {
 
     expect(response2.status).toBe(201);
 
-    const listResponse = await request(app).get('/teacher').send();
+    const listResponse = await request(app).get('/api/teacher').send();
 
     expect(listResponse.status).toBe(200);
     expect(listResponse.body.teachers.length).toBe(2);
@@ -116,7 +116,7 @@ describe('E2E test for teacher', () => {
     });
 
     const deleteResponse = await request(app)
-      .delete(`/teacher/${teacher.id}`)
+      .delete(`/api/teacher/${teacher.id}`)
       .send();
 
     expect(deleteResponse.status).toBe(200);
@@ -140,7 +140,7 @@ describe('E2E test for teacher', () => {
     });
 
     const response2 = await request(app)
-      .put(`/teacher/${teacher.id}`)
+      .put(`/api/teacher/${teacher.id}`)
       .send({
         name: 'harry bento',
         email: 'harrybento@gmail.com',
@@ -155,8 +155,35 @@ describe('E2E test for teacher', () => {
           city: 'Luanda',
           address: 'Cazenga',
         },
-      });
+      })
 
     expect(response2.status).toBe(200);
+      
+    
   });
+
+  // it('should be able  to authenticate a teacher', async () => {
+  //   const address = new Address('State', 'City', 'Address');
+
+  //   const teacher = await createTeacherUseCases.execute({
+  //     name: 'teacher',
+  //     email: 'teacher@gmail.com',
+  //     password: '1234',
+  //     phone_numbers: [
+  //       {
+  //         id: '123',
+  //         teacherId: '123',
+  //         phone: '222-222-22',
+  //       },
+  //     ],
+  //     address: address,
+  //   });
+
+  //   const response = await request(app).post('/api/teacher/login').send({
+  //     email: teacher.email,
+  //     password: teacher.password,
+  //   });
+
+  //   expect(response.status).toBe(200)
+  // });
 });
