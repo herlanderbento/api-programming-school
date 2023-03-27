@@ -6,19 +6,24 @@ import TeacherModel from '../models/teacher.model';
 
 export default class TeacherRepository implements TeacherRepositoryInterface {
   private _mapper: TeacherInterfaceMapper;
+  private _model: typeof TeacherModel;
 
-  constructor(teacherInterfaceMapper: TeacherInterfaceMapper) {
+  constructor(
+    teacherInterfaceMapper: TeacherInterfaceMapper,
+    model: typeof TeacherModel
+  ) {
     this._mapper = teacherInterfaceMapper;
+    this._model = model;
   }
 
   async create(entity: Teacher): Promise<void> {
-    await TeacherModel.create(this._mapper.toModel(entity), {
+    await this._model.create(this._mapper.toModel(entity), {
       include: [{ model: TeacherPhoneNumbersModel }],
     });
   }
 
   async update(entity: Teacher): Promise<void> {
-    await TeacherModel.update(this._mapper.toModel(entity), {
+    await this._model.update(this._mapper.toModel(entity), {
       where: {
         id: entity.id,
       },
@@ -26,7 +31,7 @@ export default class TeacherRepository implements TeacherRepositoryInterface {
   }
   async findById(id: string): Promise<Teacher> {
     try {
-      const teacher = await TeacherModel.findOne({
+      const teacher = await this._model.findOne({
         where: {
           id,
         },
@@ -40,8 +45,25 @@ export default class TeacherRepository implements TeacherRepositoryInterface {
     }
   }
 
+  async findByEmail(email: string): Promise<Teacher> {
+      const teacher = await this._model.findOne({
+        where: {
+          email,
+        },
+        rejectOnEmpty: true,
+        include: ['phone_numbers'],
+      });
+
+      if(!teacher){
+        throw new Error('Teacher not found');
+      }
+
+      return this._mapper.toEntity(teacher);
+    
+  }
+
   async findAll(): Promise<Teacher[]> {
-    const teacherModel = await TeacherModel.findAll({
+    const teacherModel = await this._model.findAll({
       include: ['phone_numbers'],
     });
 
@@ -49,7 +71,7 @@ export default class TeacherRepository implements TeacherRepositoryInterface {
   }
 
   async delete(id: string): Promise<void> {
-    await TeacherModel.destroy({
+    await this._model.destroy({
       where: {
         id,
       },

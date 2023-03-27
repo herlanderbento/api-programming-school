@@ -8,5 +8,5 @@ const createUserAdminController = new CreateUserAdminController();
 const authenticationUserAdminController =
   new AuthenticationUserAdminController();
 
-userAdminRoutes.post('/user-admin', createUserAdminController.handle);
+userAdminRoutes.post('/', createUserAdminController.handle);
 userAdminRoutes.post('/auth', authenticationUserAdminController.handle);

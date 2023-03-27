@@ -5,6 +5,7 @@ import UpdateTeacherUseCases from '../../../application/usecases/teacher/update/
 import TeacherRepositoryInterface from '../../../domain/teacher/repository/teacher-repository.interface';
 import TeacherPhoneNumbersImplementationMapper from '../../../infrastructure/teacher/sequelize/mappers/implementations/teacher-phone-numbers.implementation.mapper';
 import TeacherImplementationMapper from '../../../infrastructure/teacher/sequelize/mappers/implementations/teacher.implementation.mapper';
+import TeacherModel from '../../../infrastructure/teacher/sequelize/models/teacher.model';
 import TeacherRepository from '../../../infrastructure/teacher/sequelize/repository/teacher-repository';
 
 const teacherPhoneNumbersMapper = new TeacherPhoneNumbersImplementationMapper();
@@ -12,7 +13,8 @@ const teacherMapper = new TeacherImplementationMapper(
   teacherPhoneNumbersMapper
 );
 const teacherRepository: TeacherRepositoryInterface = new TeacherRepository(
-  teacherMapper
+  teacherMapper,
+  TeacherModel
 );
 
 export const createTeacherUseCases = new CreateTeacherUseCases(
@@ -27,4 +29,4 @@ export const deleteTeacherUseCases = new DeleteTeacherUseCases(
   teacherRepository
 );
 
-export const listTeacherUseCases = new ListTeacherUseCases(teacherRepository)
+export const listTeacherUseCases = new ListTeacherUseCases(teacherRepository);

@@ -44,14 +44,14 @@ export default class UserAdminRepository
     try {
       const userAdminModel = await this.userAdminRepository.findOne({
         where: {
-          email,
+          email: email,
         },
         rejectOnEmpty: true,
       });
 
       return this._mapper.toEntity(userAdminModel);
     } catch (error) {
-      throw new Error('user admin not found');
+      throw new Error('user admin not found2');
     }
   }
 }

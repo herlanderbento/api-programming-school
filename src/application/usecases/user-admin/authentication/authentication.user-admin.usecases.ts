@@ -15,13 +15,13 @@ export default class AuthenticationUserAdminUseCases {
     email,
     password,
   }: InputAuthenticationUserAdmin): Promise<OutputAuthenticationUserAdmin> {
-    const user = await this.userAdminRepository.findByEmail(email);
+    const userAdmin = await this.userAdminRepository.findByEmail(email);
 
-    if (!user) {
+    if (!userAdmin) {
       throw new Error('Email or password incorrect!');
     }
 
-    const passwordMatch = await compare(password, user.password);
+    const passwordMatch = await compare(password, userAdmin.password);
 
     if (!passwordMatch) {
       throw new Error('Email or password incorrect!');
@@ -30,15 +30,15 @@ export default class AuthenticationUserAdminUseCases {
     const { secret_token, expires_in_token } = authConfig;
 
     const token = sign({}, secret_token, {
-      subject: user.id,
+      subject: userAdmin.id,
       expiresIn: expires_in_token,
     });
 
     const tokenReturn: OutputAuthenticationUserAdmin = {
       token,
       user: {
-        name: user.name,
-        email: user.email,
+        name: userAdmin.name,
+        email: userAdmin.email,
       },
     };
 

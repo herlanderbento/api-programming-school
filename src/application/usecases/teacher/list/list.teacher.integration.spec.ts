@@ -16,7 +16,8 @@ describe('Integration tests teacher', () => {
     teacherPhoneNumbersMapper
   );
   const teacherRepository: TeacherRepositoryInterface = new TeacherRepository(
-    teacherMapper
+    teacherMapper,
+    TeacherModel
   );
   const createTeacherUseCases = new CreateTeacherUseCases(teacherRepository);
   const listTeacherUseCases = new ListTeacherUseCases(teacherRepository);

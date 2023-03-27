@@ -48,8 +48,8 @@ describe('Integration tests authentication user admin ', () => {
     await createUserAdminUseCases.execute(userAdmin);
 
     const result = await authenticationUserAdminUseCases.execute({
-      email: userAdmin.email,
-      password: userAdmin.password,
+      email: 'admin@admin.com',
+      password: 'admin',
     });
 
     expect(result).toHaveProperty('token');

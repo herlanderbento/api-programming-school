@@ -25,10 +25,11 @@ const teacher = TeacherFactory.createWithAddress(createTeacher);
 describe('Unit tests delete teacher use cases', () => {
   const MockRepository = () => {
     return {
-      findAll: jest.fn(),
       create: jest.fn(),
-      findById: jest.fn().mockReturnValue(Promise.resolve(teacher.id)),
       update: jest.fn(),
+      findAll: jest.fn(),
+      findById: jest.fn().mockReturnValue(Promise.resolve(teacher.id)),
+      findByEmail: jest.fn(),
       delete: jest.fn(),
     };
   };

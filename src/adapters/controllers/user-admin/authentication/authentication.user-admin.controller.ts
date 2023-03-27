@@ -7,11 +7,11 @@ export default class AuthenticationUserAdminController {
 
     try {
       const output = authenticationUserAdminUseCases.execute({
-        email,
-        password,
+        email: email,
+        password: password,
       });
 
-      return response.status(201).send(output);
+      return response.status(200).send(output);
     } catch (error) {
       return response.status(500).send(error);
     }

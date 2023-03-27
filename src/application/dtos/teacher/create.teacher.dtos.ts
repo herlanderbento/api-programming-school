@@ -27,6 +27,7 @@ export interface OutputCreateTeacherDto {
     city: string;
     address: string;
   };
+  password?: string;
   createdAt: Date;
   updatedAt: Date;
 }

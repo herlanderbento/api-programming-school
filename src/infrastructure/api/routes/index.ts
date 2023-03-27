@@ -4,7 +4,7 @@ import { userAdminRoutes } from './user-admin.routes';
 
 const router = Router();
 
-router.use(userAdminRoutes);
+router.use('/user-admin',userAdminRoutes);
 router.use('/teacher', teacherRoutes);
 
 export { router };

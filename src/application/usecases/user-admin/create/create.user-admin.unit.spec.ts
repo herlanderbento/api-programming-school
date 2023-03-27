@@ -6,7 +6,10 @@ const UserAdminMockRepository = () => {
   return {
     findById: jest.fn(),
     findByEmail: jest.fn(),
+    findAll: jest.fn(),
     create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
   };
 };
 
@@ -16,13 +19,10 @@ describe('Unit tests user admin usecases', () => {
     const createUserAdminUseCases = new CreateUserAdminUseCases(
       userAdminRepository
     );
-
-    const passwordHash = await hash('123', 8);
-
     const input = {
       name: 'admin',
       email: 'admin@gmail.com',
-      password: passwordHash,
+      password: 'admin',
     };
 
     const result = await createUserAdminUseCases.execute(input);

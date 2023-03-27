@@ -6,7 +6,8 @@ import TeacherImplementationMapper from '../../../../infrastructure/teacher/sequ
 import TeacherPhoneNumbersModel from '../../../../infrastructure/teacher/sequelize/models/teacher-phone-numbers.model';
 import TeacherModel from '../../../../infrastructure/teacher/sequelize/models/teacher.model';
 import TeacherRepository from '../../../../infrastructure/teacher/sequelize/repository/teacher-repository';
-import CreateTeacherUseCases from './create.teacher.usecases';
+import CreateTeacherUseCases from '../create/create.teacher.usecases';
+import AuthenticationTeacherUseCases from './authentication.teacher.use-cases';
 
 describe('Integration tests teacher', () => {
   const teacherPhoneNumbersMapper =
@@ -20,6 +21,10 @@ describe('Integration tests teacher', () => {
   );
 
   const createTeacherUseCases = new CreateTeacherUseCases(teacherRepository);
+
+  const authenticationTeacherUseCases = new AuthenticationTeacherUseCases(
+    teacherRepository
+  );
 
   let sequelize: Sequelize;
 
@@ -39,10 +44,10 @@ describe('Integration tests teacher', () => {
     await sequelize.close();
   });
 
-  it('should be able a create teacher use cases', async () => {
+  it('should be able to authentication teacher', async () => {
     const address = new Address('State', 'City', 'Address');
 
-    const input = {
+    const teacher = {
       name: 'teacher',
       email: 'teacher@gmail.com',
       password: '1234',
@@ -56,33 +61,12 @@ describe('Integration tests teacher', () => {
       address: address,
     };
 
-    const result = await createTeacherUseCases.execute(input);
+    await createTeacherUseCases.execute(teacher);
 
-    const output = {
-      id: result.id,
-      name: result.name,
-      email: result.email,
-      phone_numbers: result.phone_numbers.map((item) => ({
-        id: item.id,
-        teacherId: item.teacherId,
-        phone: item.phone,
-      })),
-      address: {
-        state: result.address.state,
-        city: result.address.city,
-        address: result.address.address,
-      },
-      password: result.password,
-      createdAt: result.createdAt,
-      updatedAt: result.updatedAt,
-    };
-
-    expect(result).toEqual(output);
-    expect(result.id).toBeDefined();
-    expect(result.name).toEqual(input.name);
-    expect(result.email).toEqual(input.email);
-    expect(result.phone_numbers.length).toBe(1);
-    expect(result.createdAt).toBeDefined();
-    expect(result.updatedAt).toBeDefined();
+    const result = await authenticationTeacherUseCases.execute({
+      email: teacher.email,
+      password: teacher.password,
+    });
+    expect(result).toHaveProperty('token');
   });
 });

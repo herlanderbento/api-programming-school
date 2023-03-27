@@ -40,6 +40,7 @@ describe('Unit tests teacher use cases', () => {
         city: result.address.city,
         address: result.address.address,
       },
+      password: result.password,
       createdAt: result.createdAt,
       updatedAt: result.updatedAt,
     };

@@ -54,8 +54,16 @@ export default class TeacherRepositoryInMemory
       throw new Error('Teacher not found');
     }
   }
+
+  public async findByEmail(email: string): Promise<Teacher> {
+    try {
+      return this.teacherRepository.find((teacher) => teacher.email === email);
+    } catch (error) {
+      throw new Error('Teacher not found');
+    }
+  }
   public async findAll(): Promise<Teacher[]> {
-    return this.teacherRepository
+    return this.teacherRepository;
   }
 
   public async delete(id: string): Promise<void> {

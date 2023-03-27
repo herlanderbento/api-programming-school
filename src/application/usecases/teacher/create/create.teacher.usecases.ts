@@ -55,6 +55,7 @@ export default class CreateTeacherUseCases {
         city: teacher.address.city,
         address: teacher.address.address,
       },
+      password: teacher.password,
       createdAt: teacher.createdAt,
       updatedAt: teacher.updatedAt,
     };

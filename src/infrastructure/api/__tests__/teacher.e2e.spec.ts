@@ -5,6 +5,7 @@ import TeacherRepository from '../../teacher/sequelize/repository/teacher-reposi
 import TeacherImplementationMapper from '../../teacher/sequelize/mappers/implementations/teacher.implementation.mapper';
 import TeacherPhoneNumbersImplementationMapper from '../../teacher/sequelize/mappers/implementations/teacher-phone-numbers.implementation.mapper';
 import Address from '../../../domain/teacher/value-object/address';
+import TeacherModel from '../../teacher/sequelize/models/teacher.model';
 
 let createTeacherUseCases: CreateTeacherUseCases;
 let teacherRepository: TeacherRepository;
@@ -16,7 +17,7 @@ describe('E2E test for teacher', () => {
     const teacherMapper = new TeacherImplementationMapper(
       teacherPhoneNumbersMapper
     );
-    teacherRepository = new TeacherRepository(teacherMapper);
+    teacherRepository = new TeacherRepository(teacherMapper, TeacherModel);
     createTeacherUseCases = new CreateTeacherUseCases(teacherRepository);
     await sequelize.sync({ force: true });
   });

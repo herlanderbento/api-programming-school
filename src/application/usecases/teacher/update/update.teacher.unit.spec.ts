@@ -27,6 +27,7 @@ describe('Unit test for teacher update use cases', () => {
       findAll: jest.fn(),
       create: jest.fn(),
       findById: jest.fn().mockReturnValue(Promise.resolve(teacher)),
+      findByEmail: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
     };
