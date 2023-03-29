@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import StudentsFactory from '../../../../domain/students/factory/students.factory';
 import StudentsRepositoryInterface from '../../../../domain/students/repository/students-repository.interface';
 import Address from '../../../../domain/students/value-object/address';
@@ -12,6 +13,8 @@ export default class CreateStudentsUseCases {
   public async execute(
     input: InputCreateStudentsDtos
   ): Promise<OutputCreateStudentsDtos> {
+    const passwordHash = await hash(input.password, 8);
+
     const address = new Address(
       input.address.state,
       input.address.city,
@@ -21,7 +24,7 @@ export default class CreateStudentsUseCases {
     const createStudentsProps = {
       name: input.name,
       email: input.email,
-      password: input.password,
+      password: passwordHash,
       address: address,
       createdAt: input.createdAt,
       updatedAt: input.updatedAt,

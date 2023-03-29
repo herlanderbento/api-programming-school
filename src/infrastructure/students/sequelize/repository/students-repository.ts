@@ -36,6 +36,15 @@ export default class StudentsRepository implements StudentsRepositoryInterface {
     }
   }
 
+  public async findByEmail(email: string): Promise<StudentsModel> {
+    return await this._studentsModel.findOne({
+      where: {
+        email,
+      },
+      rejectOnEmpty: true,
+    });
+  }
+
   public async findAll(): Promise<Students[]> {
     const students = await this._studentsModel.findAll({});
 

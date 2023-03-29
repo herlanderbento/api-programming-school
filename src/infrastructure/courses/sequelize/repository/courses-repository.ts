@@ -8,6 +8,9 @@ export default class CoursesRepository implements CoursesRepositoryInterface {
     private _mapper: CoursesInterfaceMapper,
     private _coursesModel: typeof CoursesModel
   ) {}
+  findByEmail(email: string): Promise<Courses> {
+    throw new Error('Method not implemented.');
+  }
 
   public async create(entity: Courses): Promise<void> {
     await this._coursesModel.create(this._mapper.toModel(entity));

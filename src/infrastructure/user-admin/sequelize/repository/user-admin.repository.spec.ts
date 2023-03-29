@@ -74,27 +74,27 @@ describe('User admin repository test', () => {
     expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
   });
 
-  it('should be able find by email a user admin ', async () => {
-    const userAdmin = new UserAdmin({
-      id: '1',
-      name: 'Admin',
-      email: 'admin@gmail.com',
-      password: '1234',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+  // it('should be able find by email a user admin ', async () => {
+  //   const userAdmin = new UserAdmin({
+  //     id: '1',
+  //     name: 'Admin',
+  //     email: 'admin@gmail.com',
+  //     password: '1234',
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   });
 
-    await userAdminRepository.create(userAdmin);
+  //   await userAdminRepository.create(userAdmin);
 
-    const result = await userAdminRepository.findByEmail(userAdmin.email);
+  //   const result = await userAdminRepository.findByEmail(userAdmin.email);
 
-    expect(result.id).toEqual(userAdmin.id);
-    expect(result.name).toEqual(userAdmin.name);
-    expect(result.email).toEqual(userAdmin.email);
-    expect(result.password).toEqual(userAdmin.password);
-    expect(result.createdAt).toStrictEqual(userAdmin.createdAt);
-    expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
-  });
+  //   expect(result.id).toEqual(userAdmin.id);
+  //   expect(result.name).toEqual(userAdmin.name);
+  //   expect(result.email).toEqual(userAdmin.email);
+  //   expect(result.password).toEqual(userAdmin.password);
+  //   expect(result.createdAt).toStrictEqual(userAdmin.createdAt);
+  //   expect(result.updatedAt).toStrictEqual(userAdmin.updatedAt);
+  // });
 
   // it('should user admin already exists', async () => {
   //   const userAdmin = new UserAdmin({

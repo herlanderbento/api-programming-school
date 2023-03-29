@@ -40,18 +40,22 @@ export default class UserAdminRepository
     }
   }
 
-  public async findByEmail(email: string): Promise<UserAdmin | null> {
-    try {
-      const userAdminModel = await this.userAdminRepository.findOne({
-        where: {
-          email: email,
-        },
-        rejectOnEmpty: true,
-      });
-
-      return this._mapper.toEntity(userAdminModel);
-    } catch (error) {
-      throw new Error('user admin not found2');
-    }
+  public async findByEmail(email: string): Promise<UserAdminModel> {
+    return await this.userAdminRepository.findOne({
+      where: {
+        email,
+      },
+    });
+    // try {
+    //   const userAdminModel = await this.userAdminRepository.findOne({
+    //     where: {
+    //       email: email,
+    //     },
+    //     rejectOnEmpty: true,
+    //   });
+    //   return this._mapper.toEntity(userAdminModel);
+    // } catch (error) {
+    //   throw new Error('user admin not found2');
+    // }
   }
 }
