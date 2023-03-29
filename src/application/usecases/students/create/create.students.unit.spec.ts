@@ -1,5 +1,5 @@
 import Address from '../../../../domain/students/value-object/address';
-import CreateStudentUseCases from './create.students.usecases';
+import CreateStudentsUseCases from './create.students.usecases';
 
 const studentsMockRepository = () => {
   return {
@@ -14,7 +14,7 @@ const studentsMockRepository = () => {
 
 describe('Unit tests students use cases', () => {
   const studentsRepository = studentsMockRepository();
-  const createStudentUsesCases = new CreateStudentUseCases(studentsRepository);
+  const createStudentUsesCases = new CreateStudentsUseCases(studentsRepository);
 
   test('should create a student', async () => {
     const address = new Address('state', 'city', 'address');
