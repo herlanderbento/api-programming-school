@@ -24,7 +24,7 @@ export default class CreateTeacherUseCases {
     });
 
     const address = new Address(
-      input.address.address,
+      input.address.state,
       input.address.city,
       input.address.address
     );

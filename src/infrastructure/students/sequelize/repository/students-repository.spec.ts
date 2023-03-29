@@ -1,20 +1,14 @@
 import { Sequelize } from 'sequelize-typescript';
 import Students from '../../../../domain/students/entity/students';
-import StudentsPhoneNumbers from '../../../../domain/students/entity/students-phone-numbers';
+
 import StudentsRepositoryInterface from '../../../../domain/students/repository/students-repository.interface';
 import Address from '../../../../domain/students/value-object/address';
-import StudentsPhoneNumbersImplementationMapper from '../mappers/implementations/students-phone-numbers.implementation.mapper';
 import StudentsImplementationMapper from '../mappers/implementations/students.implementation.mapper';
-import StudentsPhoneNumbersModel from '../models/students-phone-numbers.model';
 import StudentsModel from '../models/students.model';
 import StudentsRepository from './students-repository';
 
 describe('Integration test students repository', () => {
-  const studentsPhoneNumbersMapper =
-    new StudentsPhoneNumbersImplementationMapper();
-  const studentsMapper = new StudentsImplementationMapper(
-    studentsPhoneNumbersMapper
-  );
+  const studentsMapper = new StudentsImplementationMapper();
 
   const studentsRepository: StudentsRepositoryInterface =
     new StudentsRepository(studentsMapper, StudentsModel);
@@ -38,12 +32,11 @@ describe('Integration test students repository', () => {
   });
 
   it('should be able create a student', async () => {
-    const student = new Students(
-      '123',
-      'student',
-      'student@gmail.com',
-      '12345'
-    );
+    const student = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 
@@ -66,16 +59,17 @@ describe('Integration test students repository', () => {
       city: student.address.city,
       address: student.address.address,
       active: student.isActive(),
+      createdAt: student.createdAt,
+      updatedAt: student.updatedAt,
     });
   });
 
   it('should be able update a student', async () => {
-    const student = new Students(
-      '123',
-      'student',
-      'student@gmail.com',
-      '12345'
-    );
+    const student = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 
@@ -104,16 +98,17 @@ describe('Integration test students repository', () => {
       city: student.address.city,
       address: student.address.address,
       active: student.isActive(),
+      createdAt: student.createdAt,
+      updatedAt: student.updatedAt,
     });
   });
 
   it('should find a student', async () => {
-    const student = new Students(
-      '123',
-      'student',
-      'student@gmail.com',
-      '12345'
-    );
+    const student = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 
@@ -127,19 +122,17 @@ describe('Integration test students repository', () => {
   });
 
   it('should be able find all students', async () => {
-    const student1 = new Students(
-      '123',
-      'student',
-      'student@gmail.com',
-      '12345'
-    );
+    const student1 = new Students({
+      name: 'student1',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
-    const student2 = new Students(
-      '1234',
-      'student',
-      'student@gmail.com',
-      '12345'
-    );
+    const student2 = new Students({
+      name: 'student2',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
     const address = new Address('state1', 'city1', 'address1');
 
@@ -154,18 +147,14 @@ describe('Integration test students repository', () => {
     expect(students).toHaveLength(2);
     expect(students).toContainEqual(student1);
     expect(students).toContainEqual(student2);
-
-    // expect([student1, student2]).toStrictEqual(students);
   });
 
   it('should be able delete student', async () => {
-    const student = new Students(
-      '123',
-      'student',
-      'student@gmail.com',
-      '12345'
-    );
-
+    const student = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
     const address = new Address('state1', 'city1', 'address1');
 
     student.changeAddress(address);

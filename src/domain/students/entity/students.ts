@@ -1,31 +1,29 @@
-import Entity from '../../@shared/entity/entity.abstract';
+import BaseEntity from '../../@shared/entity/base.entity';
 import NotificationError from '../../@shared/notification/notification.error';
 import StudentsValidatorFactory from '../factory/students.validator.factory';
 import Address from '../value-object/address';
-import StudentsPhoneNumbers from './students-phone-numbers';
 
-export default class Students extends Entity {
+export type StudentsEntityProps = {
+  id?: string;
+  name: string;
+  email: string;
+  password: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export default class Students extends BaseEntity {
   private _name: string;
   private _email: string;
   private _password: string;
   private _address!: Address;
-  // private _phone_numbers: StudentsPhoneNumbers[];
   private _active: boolean = false;
 
-  constructor(
-    id: string,
-    name: string,
-    email: string,
-    password: string,
-    // phone_numbers: StudentsPhoneNumbers[]
-  ) {
-    super();
-
-    this._id = id;
-    this._name = name;
-    this._email = email;
-    this._password = password;
-    // this._phone_numbers = phone_numbers;
+  constructor(props: StudentsEntityProps) {
+    super(props.id, props.createdAt, props.updatedAt);
+    this._name = props.name;
+    this._email = props.email;
+    this._password = props.password;
     this.validate();
 
     if (this.notification.hasErrors())
@@ -63,14 +61,6 @@ export default class Students extends Entity {
   public changeAddress(address: Address) {
     this._address = address;
   }
-
-  // public get phone_numbers(): StudentsPhoneNumbers[] {
-  //   return this._phone_numbers;
-  // }
-
-  // public changePhoneNumbers(phone_numbers: StudentsPhoneNumbers[]) {
-  //   this._phone_numbers = phone_numbers;
-  // }
 
   public isActive(): boolean {
     return this._active;

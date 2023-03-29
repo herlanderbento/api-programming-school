@@ -1,6 +1,5 @@
 import AggregateRoot from '../../@shared/entity/aggregate-root.interface';
 import BaseEntity from '../../@shared/entity/base.entity';
-import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
 
 import TeacherValidatorFactory from '../factory/teacher.validator.factory';

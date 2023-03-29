@@ -1,53 +1,65 @@
 import Address from '../value-object/address';
 import Students from './students';
-import StudentsPhoneNumbers from './students-phone-numbers';
 
 describe('Unit tests students', () => {
-  it('should throw error when id is empty', () => {
-    expect(() => {
-      new Students('', 'Student', 'student@gmail.com', '1234');
-    }).toThrowError('students: Id is required');
-  });
-
   it('should throw when name is empty', () => {
     expect(() => {
-      new Students('123', '', 'student@gmail.com', '12345');
+      new Students({
+        name: '',
+        email: 'student@students.com',
+        password: 'password',
+      });
     }).toThrowError('students: Name is required');
   });
 
   it('should throw when email is empty', () => {
     expect(() => {
-      new Students('123', 'Student', '', '12345');
+      new Students({
+        name: 'student',
+        email: '',
+        password: 'password',
+      });
     }).toThrowError('students: Email is required');
   });
 
   it('should throw when email is invalid format', () => {
     expect(() => {
-      new Students('123', 'Student', '@studentcom', '1234');
+      new Students({
+        name: 'student',
+        email: '@students.com',
+        password: 'password',
+      });
     }).toThrowError('students: Email invalid format');
   });
 
   it('should throw when password is empty', () => {
     expect(() => {
-      new Students('123', 'Student', 'student@gmail.com', '');
+      new Students({
+        name: 'student',
+        email: 'student@students.com',
+        password: '',
+      });
     }).toThrowError('students: Password is required');
   });
 
   it('should throw error when id, name, email and password are empty', () => {
     expect(() => {
-      new Students('', '', '', '');
+      new Students({
+        name: '',
+        email: '',
+        password: '',
+      });
     }).toThrowError(
-      'students: Id is required,students: Name is required,students: Email is required,students: Password is required'
+      'students: Name is required,students: Email is required,students: Password is required'
     );
   });
 
   it('should be able change name, email, password', () => {
-    const students = new Students(
-      '123',
-      'Students',
-      'student@gmail.com',
-      '12345'
-    );
+    const students = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
     students.changeName('Marcia Gaieta');
     students.changeEmail('eugeniagaieta@gmail.com');
@@ -59,12 +71,11 @@ describe('Unit tests students', () => {
   });
 
   it('should be able active student', () => {
-    const students = new Students(
-      '123',
-      'Students',
-      'student@gmail.com',
-      '12345'
-    );
+    const students = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
     const address = new Address('State1', 'City1', 'Address1');
 
     students.address = address;
@@ -75,12 +86,11 @@ describe('Unit tests students', () => {
   });
 
   it('should deactivate student', () => {
-    const students = new Students(
-      '123',
-      'Student',
-      'student@gmail.com',
-      '12345'
-    );
+    const students = new Students({
+      name: 'student',
+      email: 'student@students.com',
+      password: 'password',
+    });
 
     students.deactivate();
 

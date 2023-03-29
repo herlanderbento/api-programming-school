@@ -1,28 +1,20 @@
 import Students from '../../../../../domain/students/entity/students';
 import Address from '../../../../../domain/students/value-object/address';
 import StudentsModel from '../../models/students.model';
-import StudentsPhoneNumbersInterfaceMapper from '../interfaces/students-phone-numbers.interface.mapper';
 import StudentsInterfaceMapper from '../interfaces/students.interface.mapper';
 
 export default class StudentsImplementationMapper
   implements StudentsInterfaceMapper
 {
-  private _studentsPhoneNumbersMapper: StudentsPhoneNumbersInterfaceMapper;
-
-  constructor(studentsPhoneNumbersMapper: StudentsPhoneNumbersInterfaceMapper) {
-    this._studentsPhoneNumbersMapper = studentsPhoneNumbersMapper;
-  }
-
   public toEntity(model: StudentsModel): Students {
-    const students = new Students(
-      model.id,
-      model.name,
-      model.email,
-      model.password,
-      // model.phone_numbers.map((items) =>
-      //   this._studentsPhoneNumbersMapper.toEntity(items)
-      // )
-    );
+    const students = new Students({
+      id: model.id,
+      name: model.name,
+      email: model.email,
+      password: model.password,
+      createdAt: model.createdAt,
+      updatedAt: model.updatedAt,
+    });
 
     const address = new Address(model.state, model.city, model.address);
 
@@ -43,11 +35,8 @@ export default class StudentsImplementationMapper
       city: entity.address.city,
       address: entity.address.address,
       active: entity.isActive(),
-      // phone_numbers: entity.phone_numbers.map((numbers) => ({
-      //   id: numbers.id,
-      //   teacher_id: numbers.studentId,
-      //   phone: numbers.phone,
-      // })),
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
     };
   }
 }
