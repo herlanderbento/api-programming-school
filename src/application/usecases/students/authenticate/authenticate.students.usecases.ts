@@ -14,6 +14,7 @@ export default class AuthenticateStudentsUseCases {
   public async execute(
     input: InputAuthenticateStudentsDtos
   ): Promise<OutputAuthenticateStudentsDtos> {
+    console.log({ message: 'authenticate usecases', input });
     const student = await this.studentsRepository.findByEmail(input.email);
 
     if (!student) {

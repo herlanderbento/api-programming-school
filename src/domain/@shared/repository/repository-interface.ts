@@ -4,5 +4,5 @@ export default interface RepositoryInterface<T> {
   findById(id: string): Promise<T>;
   findByEmail(email: string): Promise<T>;
   findAll(): Promise<T[]>;
-  delete(id: string): Promise<void>;
+  delete(email: string): Promise<void>;
 }

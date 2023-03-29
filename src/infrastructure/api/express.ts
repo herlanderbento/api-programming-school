@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import 'reflect-metadata';
 import express, { Express } from 'express';
 import { Sequelize } from 'sequelize-typescript';
 import TeacherPhoneNumbersModel from '../teacher/sequelize/models/teacher-phone-numbers.model';
@@ -6,7 +6,9 @@ import TeacherModel from '../teacher/sequelize/models/teacher.model';
 import UserAdminModel from '../user-admin/sequelize/model/user-admin.model';
 import { router } from './routes';
 
-import '../@shared/container'
+import '../@shared/container';
+
+import StudentsModel from '../students/sequelize/models/students.model';
 
 export const app: Express = express();
 
@@ -23,7 +25,12 @@ async function setupDb() {
     sync: { force: true },
   });
 
-  sequelize.addModels([UserAdminModel, TeacherModel, TeacherPhoneNumbersModel]);
+  sequelize.addModels([
+    UserAdminModel,
+    TeacherModel,
+    TeacherPhoneNumbersModel,
+    StudentsModel,
+  ]);
   await sequelize.sync();
 }
 

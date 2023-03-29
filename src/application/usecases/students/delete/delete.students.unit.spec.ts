@@ -31,7 +31,9 @@ describe('Unit tests for delete students', () => {
   const deleteStudentsUseCase = new DeleteStudentsUseCases(studentsRepository);
 
   test('should delete a student', async () => {
-    const result = await deleteStudentsUseCase.execute({ id: students.id });
+    const result = await deleteStudentsUseCase.execute({
+      id: students.id,
+    });
 
     expect(result.message).toBe('Student delete successfully');
   });
