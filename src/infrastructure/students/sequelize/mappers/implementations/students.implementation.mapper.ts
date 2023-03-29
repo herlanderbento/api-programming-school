@@ -19,9 +19,9 @@ export default class StudentsImplementationMapper
       model.name,
       model.email,
       model.password,
-      model.phone_numbers.map((items) =>
-        this._studentsPhoneNumbersMapper.toEntity(items)
-      )
+      // model.phone_numbers.map((items) =>
+      //   this._studentsPhoneNumbersMapper.toEntity(items)
+      // )
     );
 
     const address = new Address(model.state, model.city, model.address);
@@ -43,11 +43,11 @@ export default class StudentsImplementationMapper
       city: entity.address.city,
       address: entity.address.address,
       active: entity.isActive(),
-      phone_numbers: entity.phone_numbers.map((numbers) => ({
-        id: numbers.id,
-        teacher_id: numbers.studentId,
-        phone: numbers.phone,
-      })),
+      // phone_numbers: entity.phone_numbers.map((numbers) => ({
+      //   id: numbers.id,
+      //   teacher_id: numbers.studentId,
+      //   phone: numbers.phone,
+      // })),
     };
   }
 }

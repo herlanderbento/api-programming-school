@@ -1,7 +1,6 @@
 import Students from '../../../../domain/students/entity/students';
 import StudentsRepositoryInterface from '../../../../domain/students/repository/students-repository.interface';
 import StudentsInterfaceMapper from '../mappers/interfaces/students.interface.mapper';
-import StudentsPhoneNumbersModel from '../models/students-phone-numbers.model';
 import StudentsModel from '../models/students.model';
 
 export default class StudentsRepository implements StudentsRepositoryInterface {
@@ -11,9 +10,7 @@ export default class StudentsRepository implements StudentsRepositoryInterface {
   ) {}
 
   public async create(entity: Students): Promise<void> {
-    await this._studentsModel.create(this._studentsMappers.toModel(entity), {
-      include: [{ model: StudentsPhoneNumbersModel }],
-    });
+    await this._studentsModel.create(this._studentsMappers.toModel(entity));
   }
 
   public async update(entity: Students): Promise<void> {
@@ -30,7 +27,6 @@ export default class StudentsRepository implements StudentsRepositoryInterface {
         where: {
           id,
         },
-        include: ['phone_numbers'],
         rejectOnEmpty: true,
       });
 
@@ -41,9 +37,7 @@ export default class StudentsRepository implements StudentsRepositoryInterface {
   }
 
   public async findAll(): Promise<Students[]> {
-    const students = await this._studentsModel.findAll({
-      include: ['phone_numbers'],
-    });
+    const students = await this._studentsModel.findAll({});
 
     return students.map((student) => this._studentsMappers.toEntity(student));
   }

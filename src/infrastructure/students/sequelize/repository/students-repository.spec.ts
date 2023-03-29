@@ -29,7 +29,7 @@ describe('Integration test students repository', () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([StudentsModel, StudentsPhoneNumbersModel]);
+    sequelize.addModels([StudentsModel]);
     await sequelize.sync();
   });
 
@@ -38,24 +38,11 @@ describe('Integration test students repository', () => {
   });
 
   it('should be able create a student', async () => {
-    const studentsPhoneNumbers1 = new StudentsPhoneNumbers(
-      '123',
-      '123',
-      '2222-222-222'
-    );
-
-    const studentsPhoneNumbers2 = new StudentsPhoneNumbers(
-      '1234',
-      '123',
-      '2222-222-222'
-    );
-
     const student = new Students(
       '123',
       'student',
       'student@gmail.com',
-      '12345',
-      [studentsPhoneNumbers1, studentsPhoneNumbers2]
+      '12345'
     );
 
     const address = new Address('state1', 'city1', 'address1');
@@ -68,7 +55,6 @@ describe('Integration test students repository', () => {
       where: {
         id: student.id,
       },
-      include: ['phone_numbers'],
     });
 
     expect(studentsModel.toJSON()).toStrictEqual({
@@ -79,41 +65,16 @@ describe('Integration test students repository', () => {
       state: student.address.state,
       city: student.address.city,
       address: student.address.address,
-      phone_numbers: [
-        {
-          id: studentsPhoneNumbers1.id,
-          student_id: studentsPhoneNumbers1.studentId,
-          phone: studentsPhoneNumbers1.phone,
-        },
-        {
-          id: studentsPhoneNumbers2.id,
-          student_id: studentsPhoneNumbers2.studentId,
-          phone: studentsPhoneNumbers2.phone,
-        },
-      ],
       active: student.isActive(),
     });
   });
 
   it('should be able update a student', async () => {
-    const studentsPhoneNumbers1 = new StudentsPhoneNumbers(
-      '123',
-      '123',
-      '2222-222-222'
-    );
-
-    const studentsPhoneNumbers2 = new StudentsPhoneNumbers(
-      '1234',
-      '123',
-      '2222-222-222'
-    );
-
     const student = new Students(
       '123',
       'student',
       'student@gmail.com',
-      '12345',
-      [studentsPhoneNumbers1, studentsPhoneNumbers2]
+      '12345'
     );
 
     const address = new Address('state1', 'city1', 'address1');
@@ -132,7 +93,6 @@ describe('Integration test students repository', () => {
       where: {
         id: student.id,
       },
-      include: ['phone_numbers'],
     });
 
     expect(studentsModel.toJSON()).toStrictEqual({
@@ -143,41 +103,16 @@ describe('Integration test students repository', () => {
       state: student.address.state,
       city: student.address.city,
       address: student.address.address,
-      phone_numbers: [
-        {
-          id: studentsPhoneNumbers1.id,
-          student_id: studentsPhoneNumbers1.studentId,
-          phone: studentsPhoneNumbers1.phone,
-        },
-        {
-          id: studentsPhoneNumbers2.id,
-          student_id: studentsPhoneNumbers2.studentId,
-          phone: studentsPhoneNumbers2.phone,
-        },
-      ],
       active: student.isActive(),
     });
   });
 
   it('should find a student', async () => {
-    const studentsPhoneNumbers1 = new StudentsPhoneNumbers(
-      '123',
-      '123',
-      '2222-222-222'
-    );
-
-    const studentsPhoneNumbers2 = new StudentsPhoneNumbers(
-      '1234',
-      '123',
-      '2222-222-222'
-    );
-
     const student = new Students(
       '123',
       'student',
       'student@gmail.com',
-      '12345',
-      [studentsPhoneNumbers1, studentsPhoneNumbers2]
+      '12345'
     );
 
     const address = new Address('state1', 'city1', 'address1');
@@ -192,32 +127,18 @@ describe('Integration test students repository', () => {
   });
 
   it('should be able find all students', async () => {
-    const studentsPhoneNumbers1 = new StudentsPhoneNumbers(
-      '123',
-      '123',
-      '2222-222-222'
-    );
-
-    const studentsPhoneNumbers2 = new StudentsPhoneNumbers(
-      '1234',
-      '1234',
-      '2222-222-222'
-    );
-
     const student1 = new Students(
       '123',
       'student',
       'student@gmail.com',
-      '12345',
-      [studentsPhoneNumbers1]
+      '12345'
     );
 
     const student2 = new Students(
       '1234',
       'student',
       'student@gmail.com',
-      '12345',
-      [studentsPhoneNumbers2]
+      '12345'
     );
 
     const address = new Address('state1', 'city1', 'address1');
@@ -238,18 +159,11 @@ describe('Integration test students repository', () => {
   });
 
   it('should be able delete student', async () => {
-    const studentsPhoneNumbers2 = new StudentsPhoneNumbers(
-      '1234',
-      '123',
-      '2222-222-222'
-    );
-
     const student = new Students(
       '123',
       'student',
       'student@gmail.com',
-      '12345',
-      [studentsPhoneNumbers2]
+      '12345'
     );
 
     const address = new Address('state1', 'city1', 'address1');

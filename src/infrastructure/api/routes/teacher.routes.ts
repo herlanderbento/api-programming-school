@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import AuthenticationTeacherController from '../../../adapters/controllers/teacher/authentication/authenticate.teacher.controller';
+import AuthenticationTeacherController from '../../../adapters/controllers/teacher/authentication/authentication.teacher.controller';
 import CreateTeacherController from '../../../adapters/controllers/teacher/create/create.teacher.controller';
 import DeleteTeacherController from '../../../adapters/controllers/teacher/delete/delete.teacher.controller';
 import ListTeacherController from '../../../adapters/controllers/teacher/list/list.teacher.controller';

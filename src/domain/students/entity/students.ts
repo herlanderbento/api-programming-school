@@ -9,7 +9,7 @@ export default class Students extends Entity {
   private _email: string;
   private _password: string;
   private _address!: Address;
-  private _phone_numbers: StudentsPhoneNumbers[];
+  // private _phone_numbers: StudentsPhoneNumbers[];
   private _active: boolean = false;
 
   constructor(
@@ -17,7 +17,7 @@ export default class Students extends Entity {
     name: string,
     email: string,
     password: string,
-    phone_numbers: StudentsPhoneNumbers[]
+    // phone_numbers: StudentsPhoneNumbers[]
   ) {
     super();
 
@@ -25,7 +25,7 @@ export default class Students extends Entity {
     this._name = name;
     this._email = email;
     this._password = password;
-    this._phone_numbers = phone_numbers;
+    // this._phone_numbers = phone_numbers;
     this.validate();
 
     if (this.notification.hasErrors())
@@ -64,13 +64,13 @@ export default class Students extends Entity {
     this._address = address;
   }
 
-  public get phone_numbers(): StudentsPhoneNumbers[] {
-    return this._phone_numbers;
-  }
+  // public get phone_numbers(): StudentsPhoneNumbers[] {
+  //   return this._phone_numbers;
+  // }
 
-  public changePhoneNumbers(phone_numbers: StudentsPhoneNumbers[]) {
-    this._phone_numbers = phone_numbers;
-  }
+  // public changePhoneNumbers(phone_numbers: StudentsPhoneNumbers[]) {
+  //   this._phone_numbers = phone_numbers;
+  // }
 
   public isActive(): boolean {
     return this._active;

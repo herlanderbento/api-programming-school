@@ -40,7 +40,7 @@ export default class UserAdminRepository
     }
   }
 
-  public async findByEmail(email: string): Promise<UserAdmin> {
+  public async findByEmail(email: string): Promise<UserAdmin | null> {
     try {
       const userAdminModel = await this.userAdminRepository.findOne({
         where: {

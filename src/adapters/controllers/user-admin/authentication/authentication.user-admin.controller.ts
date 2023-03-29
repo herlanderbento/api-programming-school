@@ -3,7 +3,9 @@ import { authenticationUserAdminUseCases } from '../../../imports/user-admin';
 
 export default class AuthenticationUserAdminController {
   public async handle(request: Request, response: Response): Promise<Response> {
-    const { email, password } = request.body
+    const { email, password } = request.body;
+
+    console.log({ message: 'authentication controller =>', email, password });
 
     try {
       const output = authenticationUserAdminUseCases.execute({
