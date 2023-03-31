@@ -18,7 +18,7 @@ interface OutputAddressProps {
   };
 }
 
-export type InputCreateStudentsDtos = Omit<StudentsProps, 'id'>;
+export type InputCreateStudentsDtos = Omit<StudentsProps, 'id' | 'createdAt' | 'updatedAt'>;
 
 export type OutputCreateStudentsDtos = Omit<
   StudentsProps,

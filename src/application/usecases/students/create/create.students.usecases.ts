@@ -26,8 +26,6 @@ export default class CreateStudentsUseCases {
       email: input.email,
       password: passwordHash,
       address: address,
-      createdAt: input.createdAt,
-      updatedAt: input.updatedAt,
     };
 
     const students = StudentsFactory.createWithAddress(createStudentsProps);

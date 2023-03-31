@@ -53,8 +53,8 @@ describe('Unit tests for update students', () => {
         city: 'city 2',
         address: 'address 2',
       },
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt,
     };
 
     expect(result).toEqual(output);

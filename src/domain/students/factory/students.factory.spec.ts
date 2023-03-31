@@ -7,8 +7,6 @@ describe('Students factory unit tests', () => {
       name: 'Teacher',
       email: 'teacher@gmail.com',
       password: '1234',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     };
     const students = StudentsFactory.create(studentProps);
 
@@ -26,8 +24,6 @@ describe('Students factory unit tests', () => {
       email: 'teacher@gmail.com',
       password: '1234',
       address: address,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     };
 
     const students = StudentsFactory.createWithAddress(studentProps);

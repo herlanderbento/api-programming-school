@@ -7,8 +7,7 @@ const student1 = StudentsFactory.createWithAddress({
   email: 'student@example.com',
   password: 'password',
   address: new Address('state1', 'city1', 'address1'),
-  createdAt: new Date('2023-03-29'),
-  updatedAt: new Date('2023-03-29'),
+
 });
 
 const student2 = StudentsFactory.createWithAddress({
@@ -16,8 +15,7 @@ const student2 = StudentsFactory.createWithAddress({
   email: 'student@example.com',
   password: 'password',
   address: new Address('state2', 'city2', 'address2'),
-  createdAt: new Date('2023-03-29'),
-  updatedAt: new Date('2023-03-29'),
+
 });
 
 const student3 = StudentsFactory.createWithAddress({
@@ -25,8 +23,7 @@ const student3 = StudentsFactory.createWithAddress({
   email: 'student@example.com',
   password: 'password',
   address: new Address('state3', 'city3', 'address3'),
-  createdAt: new Date('2023-03-29'),
-  updatedAt: new Date('2023-03-29'),
+
 });
 
 const studentsMockRepository = () => {

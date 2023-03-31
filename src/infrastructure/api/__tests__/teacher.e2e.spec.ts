@@ -155,11 +155,9 @@ describe('E2E test for teacher', () => {
           city: 'Luanda',
           address: 'Cazenga',
         },
-      })
+      });
 
     expect(response2.status).toBe(200);
-      
-    
   });
 
   // it('should be able  to authenticate a teacher', async () => {

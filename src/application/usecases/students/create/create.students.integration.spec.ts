@@ -55,8 +55,8 @@ describe('Integration tests students', () => {
         city: 'city',
         address: 'address',
       },
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt,
     };
 
     expect(result).toEqual(output);

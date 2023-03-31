@@ -39,8 +39,6 @@ describe('Integration tests for list students', () => {
       email: 'student1@example.com',
       password: 'password',
       address: address,
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
     });
 
     await createStudentUsesCases.execute({
@@ -48,8 +46,6 @@ describe('Integration tests for list students', () => {
       email: 'student2@example.com',
       password: 'password',
       address: address,
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
     });``    
 
     await createStudentUsesCases.execute({
@@ -57,8 +53,6 @@ describe('Integration tests for list students', () => {
       email: 'student3@example.com',
       password: 'password',
       address: address,
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
     });
 
     const result = await listStudentUsesCases.execute();

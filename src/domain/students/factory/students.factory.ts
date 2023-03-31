@@ -5,8 +5,6 @@ type StudentsProps = {
   name: string;
   email: string;
   password: string;
-  createdAt: Date;
-  updatedAt: Date;
 };
 
 type AddressProps = {
@@ -21,8 +19,6 @@ export default class StudentsFactory {
       name: props.name,
       email: props.email,
       password: props.password,
-      createdAt: props.createdAt,
-      updatedAt: props.updatedAt,
     });
   }
 
@@ -31,8 +27,6 @@ export default class StudentsFactory {
       name: props.name,
       email: props.email,
       password: props.password,
-      createdAt: props.createdAt,
-      updatedAt: props.updatedAt,
     });
 
     students.changeAddress(props.address);

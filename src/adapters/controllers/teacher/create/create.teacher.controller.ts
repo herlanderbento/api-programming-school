@@ -15,7 +15,7 @@ export default class CreateTeacherController {
     });
 
     const inputAddress = new Address(
-      address.address,
+      address.state,
       address.city,
       address.address
     );

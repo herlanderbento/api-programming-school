@@ -18,7 +18,10 @@ interface OutputAddressProps {
   };
 }
 
-export type InputUpdateStudentsDtos = Omit<StudentsProps, 'password'>;
+export type InputUpdateStudentsDtos = Omit<
+  StudentsProps,
+  'password' | 'createdAt' | 'updatedAt'
+>;
 
 export type OutputUpdateStudentsDtos = Omit<
   StudentsProps,

@@ -40,8 +40,6 @@ describe('Integration tests for update students', () => {
       email: 'student@example.com',
       password: 'password',
       address: address,
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
     };
 
     const result = await createStudentUsesCases.execute(input);
@@ -53,8 +51,6 @@ describe('Integration tests for update students', () => {
       name: 'student 2',
       email: 'student@example.com',
       address: address2,
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
     };
 
     const result2 = await updateStudentsUseCases.execute(input2);
@@ -68,8 +64,8 @@ describe('Integration tests for update students', () => {
         city: 'city2',
         address: 'address3',
       },
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt,
     };
 
     expect(result2).toEqual(output);

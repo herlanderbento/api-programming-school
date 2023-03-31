@@ -24,8 +24,6 @@ describe('Unit tests students use cases', () => {
       email: 'student@example.com',
       password: 'password',
       address: address,
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
     };
 
     const result = await createStudentUsesCases.execute(
@@ -41,8 +39,8 @@ describe('Unit tests students use cases', () => {
         city: 'city',
         address: 'address',
       },
-      createdAt: new Date('2023-03-29'),
-      updatedAt: new Date('2023-03-29'),
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt,
     };
 
     expect(result).toEqual(output);
