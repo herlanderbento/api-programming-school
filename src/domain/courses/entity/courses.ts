@@ -1,31 +1,34 @@
+import BaseEntity from '../../@shared/entity/base.entity';
 import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
-import Teacher from '../../teacher/entity/teacher';
 import CoursesValidatorFactory from '../factory/courses.validator.factory';
 
-export default class Courses extends Entity {
+type CoursesProps = {
+  id?: string;
+  name: string;
+  teacherId: string;
+  startDate: Date;
+  endDate: Date;
+  active?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export default class Courses extends BaseEntity {
   private _name: string;
   private _teacherId: string;
   private _startDate: Date;
   private _endDate: Date;
-  private _active: boolean;
+  private _active: boolean = false;
 
-  constructor(
-    id: string,
-    teacherId: string,
-    name: string,
-    startDate: Date,
-    endDate: Date,
-    active: boolean
-  ) {
-    super();
+  constructor(props: CoursesProps) {
+    super(props.id, props.createdAt, props.updatedAt);
 
-    this._id = id;
-    this._teacherId = teacherId;
-    this._name = name;
-    this._startDate = startDate;
-    this._endDate = endDate;
-    this._active = active;
+    this._teacherId = props.teacherId;
+    this._name = props.name;
+    this._startDate = props.startDate;
+    this._endDate = props.endDate;
+    this._active = props.active;
     this.validate();
 
     if (this.notification.hasErrors())

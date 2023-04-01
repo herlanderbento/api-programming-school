@@ -12,7 +12,6 @@ export default class CoursesYupValidator
       yup
         .object()
         .shape({
-          id: yup.string().required('Id is required'),
           teacherId: yup.string().required('Teacher id is required'),
           name: yup.string().required('Name is required'),
           startDate: yup.date().required('Start date is required'),

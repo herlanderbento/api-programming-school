@@ -35,14 +35,13 @@ describe('Integration tests courses repository', () => {
   });
 
   it('should create a course', async () => {
-    const courses = new Courses(
-      '123',
-      '123',
-      'courses',
-      new Date('2022-02-26'),
-      new Date('2022-02-26'),
-      true
-    );
+    const courses = new Courses({
+      name: 'course',
+      teacherId: '123',
+      startDate: new Date('2022-02-26'),
+      endDate: new Date('2022-02-26'),
+      active: true,
+    });
 
     await coursesRepository.create(courses);
 
@@ -59,18 +58,19 @@ describe('Integration tests courses repository', () => {
       start_date: courses.startDate,
       end_date: courses.endDate,
       active: courses.isActive,
+      createdAt: courses.createdAt,
+      updatedAt: courses.updatedAt,
     });
   });
 
   it('should update a course', async () => {
-    const courses = new Courses(
-      '123',
-      '123',
-      'courses',
-      new Date('2022-02-26'),
-      new Date('2022-02-26'),
-      true
-    );
+    const courses = new Courses({
+      name: 'course',
+      teacherId: '123',
+      startDate: new Date('2022-02-26'),
+      endDate: new Date('2022-02-26'),
+      active: true,
+    });
 
     await coursesRepository.create(courses);
 
@@ -93,18 +93,19 @@ describe('Integration tests courses repository', () => {
       start_date: courses.startDate,
       end_date: courses.endDate,
       active: courses.isActive,
+      createdAt: courses.createdAt,
+      updatedAt: courses.updatedAt,
     });
   });
 
   it('should find a course', async () => {
-    const courses = new Courses(
-      '123',
-      '123',
-      'courses',
-      new Date('2022-02-26'),
-      new Date('2022-02-26'),
-      true
-    );
+    const courses = new Courses({
+      name: 'course',
+      teacherId: '123',
+      startDate: new Date('2022-02-26'),
+      endDate: new Date('2022-02-26'),
+      active: true,
+    });
 
     await coursesRepository.create(courses);
 
@@ -114,23 +115,21 @@ describe('Integration tests courses repository', () => {
   });
 
   it('should be able find all courses', async () => {
-    const course1 = new Courses(
-      '123',
-      '123',
-      'courses',
-      new Date(),
-      new Date(),
-      true
-    );
+    const course1 = new Courses({
+      name: 'course1',
+      teacherId: '123',
+      startDate: new Date('2022-02-26'),
+      endDate: new Date('2022-02-26'),
+      active: true,
+    });
 
-    const course2 = new Courses(
-      '1234',
-      '1234',
-      'Javascript Advance (React, NodeJs, NestJS )',
-      new Date(),
-      new Date(),
-      false
-    );
+    const course2 = new Courses({
+      name: 'course',
+      teacherId: '123',
+      startDate: new Date('2022-02-26'),
+      endDate: new Date('2022-02-26'),
+      active: true,
+    });
 
     await coursesRepository.create(course1);
     await coursesRepository.create(course2);
@@ -143,14 +142,13 @@ describe('Integration tests courses repository', () => {
   });
 
   it('should delete course', async () => {
-    const course = new Courses(
-      '123',
-      '123',
-      'courses',
-      new Date('2022-02-26'),
-      new Date('2022-02-26'),
-      true
-    );
+    const course = new Courses({
+      name: 'course',
+      teacherId: '123',
+      startDate: new Date('2022-02-26'),
+      endDate: new Date('2022-02-26'),
+      active: true,
+    });
 
     await coursesRepository.create(course);
 

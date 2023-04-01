@@ -6,14 +6,16 @@ export default class CoursesImplementationMapper
   implements CoursesInterfaceMapper
 {
   public toEntity(model: CoursesModel): Courses {
-    return new Courses(
-      model.id,
-      model.teacher_id,
-      model.name,
-      model.start_date,
-      model.end_date,
-      model.active
-    );
+    return new Courses({
+      id: model.id,
+      name: model.name,
+      teacherId: model.teacher_id,
+      startDate: model.start_date,
+      endDate: model.end_date,
+      active: model.active,
+      createdAt: model.createdAt,
+      updatedAt: model.updatedAt,
+    });
   }
 
   public toModel(entity: Courses) {
@@ -24,6 +26,8 @@ export default class CoursesImplementationMapper
       start_date: entity.startDate,
       end_date: entity.endDate,
       active: entity.isActive,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
     };
   }
 }

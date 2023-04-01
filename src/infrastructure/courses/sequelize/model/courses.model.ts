@@ -34,4 +34,10 @@ export default class CoursesModel extends Model {
 
   @Column({ allowNull: false })
   declare active: boolean;
+
+  @Column({ allowNull: false })
+  declare createdAt: Date;
+
+  @Column({ allowNull: false })
+  declare updatedAt: Date;
 }
