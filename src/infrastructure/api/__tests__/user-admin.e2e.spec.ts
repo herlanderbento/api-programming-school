@@ -4,7 +4,6 @@ import CreateUserAdminUseCases from '../../../application/usecases/user-admin/cr
 import UserAdminRepository from '../../user-admin/sequelize/repository/user-admin.repository';
 import UserAdminImplementationMapper from '../../user-admin/sequelize/mappers/implementation/user-admin.implementation.mapper';
 import UserAdminModel from '../../user-admin/sequelize/model/user-admin.model';
-import { hash } from 'bcrypt';
 
 let createUserAdminUseCases: CreateUserAdminUseCases;
 let userAdminRepository: UserAdminRepository;
@@ -19,19 +18,7 @@ describe('E2E test for user admin', () => {
     );
     createUserAdminUseCases = new CreateUserAdminUseCases(userAdminRepository);
 
-    const passwordHash = await hash('test123', 8);
-
     await sequelize.sync({ force: true });
-
-    await createUserAdminUseCases.execute({
-      name: 'admin',
-      email: 'admin@example.com',
-      password: passwordHash,
-    });
-  });
-
-  afterAll(async () => {
-    await sequelize.close();
   });
 
   it('should create a user admin', async () => {
@@ -44,18 +31,18 @@ describe('E2E test for user admin', () => {
     expect(response.status).toBe(201);
   });
 
-  // it('should be able to authenticate user admin', async () => {
-  //   // const userAdmin = await createUserAdminUseCases.execute({
-  //   //   name: 'admin',
-  //   //   email: 'admin@gmail.com',
-  //   //   password: 'admin',
-  //   // });
+  it('should be able to authenticate user admin', async () => {
+    const userAdmin = await createUserAdminUseCases.execute({
+      name: 'admin',
+      email: 'admin@gmail.com',
+      password: 'admin',
+    });
 
-  //   const response = await request(app).post('/api/user-admin/auth').send({
-  //     email: 'admin@example.com',
-  //     password: 'test123',
-  //   });
+    const response = await request(app).post('/api/user-admin/auth').send({
+      email: 'admin@example.com',
+      password: 'test123',
+    });
 
-  //   expect(response.status).toBe(200);
-  // });
+    expect(response.status).toBe(200);
+  });
 });

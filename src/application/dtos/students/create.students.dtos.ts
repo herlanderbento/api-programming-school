@@ -4,7 +4,7 @@ interface StudentsProps {
   id: string;
   name: string;
   email: string;
-  password: string;
+  password?: string;
   address: Address;
   createdAt: Date;
   updatedAt: Date;
@@ -18,10 +18,10 @@ interface OutputAddressProps {
   };
 }
 
-export type InputCreateStudentsDtos = Omit<StudentsProps, 'id' | 'createdAt' | 'updatedAt'>;
-
-export type OutputCreateStudentsDtos = Omit<
+export type InputCreateStudentsDtos = Omit<
   StudentsProps,
-  'password' | 'address'
-> &
+  'id' | 'createdAt' | 'updatedAt'
+>;
+
+export type OutputCreateStudentsDtos = Omit<StudentsProps, 'address'> &
   OutputAddressProps;

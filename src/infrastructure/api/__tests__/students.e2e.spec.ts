@@ -21,10 +21,6 @@ describe('E2E test for students', () => {
     await sequelize.sync({ force: true });
   });
 
-  afterAll(async () => {
-    await sequelize.close();
-  });
-
   it('should be able create a student', async () => {
     const response = await request(app)
       .post('/api/student')
@@ -122,36 +118,20 @@ describe('E2E test for students', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  //   it('should be able to  a students', async () => {
-  //     const address = new Address('state', 'city', 'address');
+  it('should be able to authenticate students', async () => {
+    const address = new Address('state', 'city', 'address');
 
-  //     const student = new Students({
-  //       name: 'student',
-  //       email: 'student@students.com',
-  //       password: 'password',
-  //       createdAt: new Date('2023-03-29'),
-  //       updatedAt: new Date('2023-03-29'),
-  //     });
+    const student = await createStudentUsesCases.execute({
+      name: 'student',
+      email: 'student@example.com',
+      password: 'password',
+      address: address,
+    });
 
-  //     student.changeAddress(address);
-
-  //     await StudentsModel.create({
-  //       id: student.id,
-  //       name: student.name,
-  //       email: student.email,
-  //       password: student.password,
-  //       state: student.address.state,
-  //       city: student.address.city,
-  //       address: student.address.address,
-  //       active: student.isActive(),
-  //       createdAt: student.createdAt,
-  //       updatedAt: student.updatedAt,
-  //     });
-
-  //     const response = await request(app).post('/api/student/login').send({
-  //       email: student.email,
-  //       password: student.password,
-  //     });
-  //     expect(response.statusCode).toBe(200);
-  //   });
+    const response = await request(app).post('/api/student/login').send({
+      email: student.email,
+      password: student.password,
+    });
+    expect(response.statusCode).toBe(200);
+  });
 });

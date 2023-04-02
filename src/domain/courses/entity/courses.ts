@@ -1,5 +1,4 @@
 import BaseEntity from '../../@shared/entity/base.entity';
-import Entity from '../../@shared/entity/entity.abstract';
 import NotificationError from '../../@shared/notification/notification.error';
 import CoursesValidatorFactory from '../factory/courses.validator.factory';
 
@@ -23,7 +22,6 @@ export default class Courses extends BaseEntity {
 
   constructor(props: CoursesProps) {
     super(props.id, props.createdAt, props.updatedAt);
-
     this._teacherId = props.teacherId;
     this._name = props.name;
     this._startDate = props.startDate;

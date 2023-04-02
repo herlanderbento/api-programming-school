@@ -22,7 +22,6 @@ export default class CoursesYupValidator
         })
         .validateSync(
           {
-            id,
             teacherId,
             name,
             startDate,

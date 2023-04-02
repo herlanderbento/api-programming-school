@@ -22,9 +22,6 @@ describe('E2E test for teacher', () => {
     await sequelize.sync({ force: true });
   });
 
-  afterAll(async () => {
-    await sequelize.close();
-  });
 
   it('should be able create teacher', async () => {
     const response = await request(app)
@@ -160,28 +157,28 @@ describe('E2E test for teacher', () => {
     expect(response2.status).toBe(200);
   });
 
-  // it('should be able  to authenticate a teacher', async () => {
-  //   const address = new Address('State', 'City', 'Address');
+  it('should be able  to authenticate a teacher', async () => {
+    const address = new Address('State', 'City', 'Address');
 
-  //   const teacher = await createTeacherUseCases.execute({
-  //     name: 'teacher',
-  //     email: 'teacher@gmail.com',
-  //     password: '1234',
-  //     phone_numbers: [
-  //       {
-  //         id: '123',
-  //         teacherId: '123',
-  //         phone: '222-222-22',
-  //       },
-  //     ],
-  //     address: address,
-  //   });
+    const teacher = await createTeacherUseCases.execute({
+      name: 'teacher',
+      email: 'teacher@gmail.com',
+      password: '1234',
+      phone_numbers: [
+        {
+          id: '123',
+          teacherId: '123',
+          phone: '222-222-22',
+        },
+      ],
+      address: address,
+    });
 
-  //   const response = await request(app).post('/api/teacher/login').send({
-  //     email: teacher.email,
-  //     password: teacher.password,
-  //   });
+    const response = await request(app).post('/api/teacher/login').send({
+      email: teacher.email,
+      password: teacher.password,
+    });
 
-  //   expect(response.status).toBe(200)
-  // });
+    expect(response.status).toBe(200)
+  });
 });
