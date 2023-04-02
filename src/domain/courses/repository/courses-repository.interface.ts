@@ -1,5 +1,8 @@
 import RepositoryInterface from '../../@shared/repository/repository-interface';
 import Courses from '../entity/courses';
 
-export default interface CoursesRepositoryInterface
-  extends RepositoryInterface<Courses> {}
+type CoursesRepositoryProps = Omit<RepositoryInterface<Courses>, 'findByEmail'>;
+
+type CoursesRepositoryInterface = CoursesRepositoryProps;
+
+export default CoursesRepositoryInterface;

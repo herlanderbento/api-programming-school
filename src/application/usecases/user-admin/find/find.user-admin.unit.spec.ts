@@ -1,4 +1,3 @@
-import UserAdmin from '../../../../domain/user-admin/entity/user-admin';
 import UserAdminInMemoryRepository from '../../../../domain/user-admin/repository/in-memory/user-admin-in-memory.repository';
 import { InputCreateUserAdminDto } from '../../../dtos/user-admin/create.user-admin.dto';
 import CreateUserAdminUseCases from '../create/create.user-admin.usecases';

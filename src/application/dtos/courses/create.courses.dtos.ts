@@ -11,7 +11,7 @@ interface CoursesProps {
 
 export type InputCreateCoursesDtos = Omit<
   CoursesProps,
-   'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt'
 >;
 
 export type OutputCreateCoursesDtos = CoursesProps;
