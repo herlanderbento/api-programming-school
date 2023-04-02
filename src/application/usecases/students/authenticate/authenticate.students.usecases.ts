@@ -14,17 +14,16 @@ export default class AuthenticateStudentsUseCases {
   public async execute(
     input: InputAuthenticateStudentsDtos
   ): Promise<OutputAuthenticateStudentsDtos> {
-    console.log({ message: 'authenticate usecases', input });
     const student = await this.studentsRepository.findByEmail(input.email);
 
     if (!student) {
-      throw new AppError('Email or password incorrect!1');
+      throw new Error('Email or password incorrect!1');
     }
 
     const passwordMatch = await compare(input.password, student.password);
 
     if (!passwordMatch) {
-      throw new AppError('Email or password incorrect!2');
+      throw new Error('Email or password incorrect!2');
     }
 
     const { secret_token, expires_in_token } = authConfig;

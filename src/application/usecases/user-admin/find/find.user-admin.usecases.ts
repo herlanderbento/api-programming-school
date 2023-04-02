@@ -1,4 +1,5 @@
 import UserAdminRepositoryInterface from '../../../../domain/user-admin/repository/user-admin-repository.interface';
+import { AppError } from '../../../../infrastructure/@shared/errors/app-error';
 import {
   InputFindUserAdminDto,
   OutputFindUserAdminDto,
@@ -11,6 +12,10 @@ export default class FindUserAdminUseCases {
     input: InputFindUserAdminDto
   ): Promise<OutputFindUserAdminDto> {
     const userAdmin = await this.userAdminRepository.findById(input.id);
+
+    if (!userAdmin) {
+      throw new AppError('User admin not found');
+    }
 
     return {
       id: userAdmin.id,

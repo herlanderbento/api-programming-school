@@ -6,6 +6,7 @@ import TeacherImplementationMapper from '../../teacher/sequelize/mappers/impleme
 import TeacherPhoneNumbersImplementationMapper from '../../teacher/sequelize/mappers/implementations/teacher-phone-numbers.implementation.mapper';
 import Address from '../../../domain/teacher/value-object/address';
 import TeacherModel from '../../teacher/sequelize/models/teacher.model';
+import { hash } from 'bcrypt';
 
 let createTeacherUseCases: CreateTeacherUseCases;
 let teacherRepository: TeacherRepository;
@@ -22,14 +23,14 @@ describe('E2E test for teacher', () => {
     await sequelize.sync({ force: true });
   });
 
-
   it('should be able create teacher', async () => {
+    const passwordHash = await hash('1233', 8);
     const response = await request(app)
       .post('/api/teacher')
       .send({
         name: 'teacher',
         email: 'teacher@gmail.com',
-        password: '1234',
+        password: passwordHash,
         phone_numbers: [
           {
             teacherId: '123',
@@ -176,9 +177,9 @@ describe('E2E test for teacher', () => {
 
     const response = await request(app).post('/api/teacher/login').send({
       email: teacher.email,
-      password: teacher.password,
+      password: '1234',
     });
 
-    expect(response.status).toBe(200)
+    expect(response.status).toBe(200);
   });
 });

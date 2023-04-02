@@ -123,14 +123,14 @@ describe('E2E test for students', () => {
 
     const student = await createStudentUsesCases.execute({
       name: 'student',
-      email: 'student@example.com',
+      email: 'student2@example.com',
       password: 'password',
       address: address,
     });
 
     const response = await request(app).post('/api/student/login').send({
       email: student.email,
-      password: student.password,
+      password: 'password',
     });
     expect(response.statusCode).toBe(200);
   });
