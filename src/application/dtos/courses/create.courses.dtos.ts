@@ -4,7 +4,7 @@ interface CoursesProps {
   teacherId: string;
   startDate: Date;
   endDate: Date;
-  active?: Boolean;
+  active?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

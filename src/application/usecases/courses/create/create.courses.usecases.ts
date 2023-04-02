@@ -11,6 +11,19 @@ export default class CreateCourseUseCases {
   public async execute(
     input: InputCreateCoursesDtos
   ): Promise<OutputCreateCoursesDtos> {
-    return;
+    const courses = CoursesFactory.create(input);
+
+    await this.coursesRepository.create(courses);
+
+    return {
+      id: courses.id,
+      teacherId: courses.teacherId,
+      name: courses.name,
+      startDate: courses.startDate,
+      endDate: courses.endDate,
+      active: courses.isActive,
+      createdAt: courses.createdAt,
+      updatedAt: courses.updatedAt,
+    };
   }
 }
